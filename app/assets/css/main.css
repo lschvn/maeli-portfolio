@@ -1,0 +1,47 @@
+@import "./fonts.css";
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis:YEAR@2013&display=swap');
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text-color:#2D2D2D;
+  --text-color-light:#9EA8AF;
+  --background-color:#DCDCDB;
+
+  --title-font: "Climate Crisis";
+  --text-font: "Facundo";
+}
+
+body {
+  font-family: var(--text-font);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-display: swap;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight:400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Climate Crisis", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "YEAR" 2000;
+}
+
+.title-font {
+  font-family: var(--title-font);
+}
+
+.text-font {
+  font-family: var(--text-font);
+}

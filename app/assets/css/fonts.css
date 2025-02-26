@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoSemiBoldRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoSemiBoldRegular.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo Bold It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoBoldItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoBoldItRegular.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoThinRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoThinRegular.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo Light It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoLightItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoLightItRegular.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo Thin It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoThinItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoThinItRegular.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoItRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoBlackRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoBlackRegular.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo SemiBold It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoSemiBoldItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoSemiBoldItRegular.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoBoldRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoBoldRegular.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoExtraLightRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoExtraLightRegular.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo Black It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoBlackItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoBlackItRegular.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoLightRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoLightRegular.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Facundo ExtraLight It';
+  src: url('../fonts/FONTSPRINGDEMO-FacundoExtraLightItRegular.woff2') format('woff2'),
+      url('../fonts/FONTSPRINGDEMO-FacundoExtraLightItRegular.woff') format('woff');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
