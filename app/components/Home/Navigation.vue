@@ -10,23 +10,29 @@
           class="nav-item" 
           @mouseenter="handleMouseEnter('PROJETS')" 
         >
-          <p>01.</p> <p>
-            PROJETS
-          </p>
+          <NuxtLink to="/projets">
+            <p>01.</p> <p>
+              PROJETS
+            </p>
+          </NuxtLink>
         </li>
         <li 
           class="nav-item" 
           @mouseenter="handleMouseEnter('A PROPOS')" 
         >
-          <p>02.</p> <p>
-            A PROPOS
-          </p>
+          <NuxtLink to="/about">
+            <p>02.</p> <p>
+              A PROPOS
+            </p>
+          </NuxtLink>
         </li>
         <li 
           class="nav-item" 
           @mouseenter="handleMouseEnter('CONTACT')" 
         >
-          <p>03.</p> <p>CONTACT</p>
+          <NuxtLink to="/contact">
+            <p>03.</p> <p>CONTACT</p>
+          </NuxtLink>
         </li>
       </ul>
     </nav>
@@ -206,7 +212,7 @@ const hideBackground = () => {
   align-items: center;
   z-index: 10;
   overflow: hidden;
-  bottom: 0;
+  bottom: 3%;
   background-color: var(--background-color);
 }
 
@@ -221,7 +227,7 @@ const hideBackground = () => {
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 4rem;
+  gap: 8rem;
 }
 
 .nav-item {
