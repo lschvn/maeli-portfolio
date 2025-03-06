@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLoadingIndicator/>
-    <AnimationEnter />
+    <SvgPortfolio />
   </div>
 </template>
 <script setup lang="ts">
