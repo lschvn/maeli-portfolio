@@ -1,5 +1,5 @@
 <template>
-  <div class="svg-container">
+  <div class="main-head-svg-container">
     <svg class="head-eye-open" width="453" height="339" viewBox="0 0 453 339" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M234.236 29.9783C231.738 35.552 227.696 38.8508 223.955 42.0539C220.889 44.6773 218.083 46.5639 216.021 47.8259C216.021 47.8259 211.018 43.9908 208.587 40.4321C205.497 35.8986 200.365 28.3876 202.905 24.9943C204.122 23.368 207.189 22.8078 209.454 23.7854C216.955 26.9917 215.163 46.8714 215.771 46.8442C216.034 46.828 216.078 43.2613 216.205 39.9453C216.406 34.1453 216.507 31.2371 216.87 29.115C218.082 21.8393 223.783 13.0123 229.669 13.2189C232.417 13.3099 234.852 15.4934 235.92 17.5255C238.013 21.5051 236.028 25.9812 234.235 29.9946L234.236 29.9783Z" fill="#2D2D2D"/>
       <path d="M419.454 258.552C407.152 264.196 386.231 260.457 386.231 260.457C386.231 260.457 382.001 264.399 375.605 268.646C369.192 272.893 360.631 277.43 351.935 278.652C340.163 280.302 330.733 275.468 326.082 273.341C307.928 264.945 265.771 252.583 223.423 249.248C182.149 259.308 142.529 278.249 125.946 289.437C121.719 292.282 113.162 298.571 101.282 298.823C92.5033 299.007 83.3257 295.892 76.314 292.733C69.3196 289.558 64.5075 286.341 64.5075 286.341C64.5075 286.341 44.4642 293.398 31.4182 289.777C15.7301 285.433 1.5543 263.305 4.52796 241.305C6.09305 229.713 12.0123 221.063 17.8581 215.143C23.6876 209.223 29.4264 206.047 30.6131 205.417C36.3181 202.518 44.408 197.656 52.0093 189.62C67.5621 173.193 67.7125 157.779 76.4627 135.127C80.8292 123.809 91.442 96.2977 116.294 75.0689C126.806 66.0861 147.268 47.692 174.577 46.5284C184.074 46.1271 190.267 47.974 207.167 46.5975C224.017 45.2343 229.765 42.4358 239.175 41.325C266.304 38.0869 289.472 52.9874 301.277 60.1814C329.213 77.183 344.097 102.647 350.207 113.102C362.456 134.078 365.074 149.257 383.072 162.981C391.86 169.69 400.634 173.223 406.724 175.145C407.992 175.568 414.177 177.808 420.883 182.7C427.587 187.624 434.812 195.202 438.222 206.387C444.684 227.653 434.237 251.753 419.454 258.552Z" fill="#2D2D2D" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
@@ -54,36 +54,48 @@ import {gsap} from "gsap"
 onMounted(() => {
   const headEyeOpen = document.querySelector('.head-eye-open')
   const headEyeClose = document.querySelector('.head-eye-close')
-  const container = document.querySelector('.svg-container')
+  const container = document.querySelector('.main-head-svg-container')
 
   // Initial setup
-  gsap.set(headEyeOpen, { opacity: 1 })
-  gsap.set(headEyeClose, { opacity: 0 })
-  gsap.to(container, { opacity: 1, duration: 0.8 })
+  gsap.set(headEyeOpen, { opacity: 1, scale: 0.9 })
+  gsap.set(headEyeClose, { opacity: 0, scale: 0.9 })
+  gsap.set(container, { opacity: 0 })
 
+  // Main timeline
+  const mainTl = gsap.timeline()
+  
+  mainTl
+    .to(container, { opacity: 1, duration: 0.8 })
+    // Animate scale over 2 seconds
+    .to([headEyeOpen, headEyeClose], { 
+      scale: 1, 
+      duration: 2, 
+      ease: "power1.out" 
+    }, "-=0.4")
+  
   // Function for natural blinking
-  const blink = () => {    
-    const tl = gsap.timeline()
-    
-    tl
-      .to(headEyeOpen, { opacity: 0, duration: 0.1 })
-      .to(headEyeClose, { opacity: 1, duration: 0.1 }, "<")
-      .to(headEyeClose, { opacity: 0, duration: 0.15 }, "+=0.1")
-      .to(headEyeOpen, { opacity: 1, duration: 0.15 }, "<")
-  }
+  const blink = (delay: number = 0) => {    
+    gsap.timeline()
+      .delay(delay)
+      .to(headEyeOpen, { opacity: 0, duration: 0.15 })
+      .to(headEyeClose, { opacity: 1, duration: 0.15 }, "<")
+      .to(headEyeClose, { opacity: 0, duration: 0.2 }, "+=0.15")
+      .to(headEyeOpen, { opacity: 1, duration: 0.2 }, "<")
+    }
 
-  blink()
+  blink(0.5)
 })
 </script>
 <style lang="css" scoped>
-.svg-container {
+.main-head-svg-container {
   opacity: 0;
 }
 
-.svg-container > svg{
+.main-head-svg-container > svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transform-origin: center center;
 }
 </style>
