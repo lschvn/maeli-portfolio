@@ -141,7 +141,7 @@ onMounted(() => {
   blink()
 
   tl.to(headEyeOpen, {
-    scale: 0.5,
+    scale: 0.45,
     duration: 0.6,
     x: -537,
     y: -396,
@@ -166,7 +166,6 @@ onMounted(() => {
     duration: 5,
     ease: 'none'
   })
-
 })
 </script>
 <style lang="css" scoped>
@@ -187,5 +186,27 @@ section {
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: center center;
+}
+.head-eye-open:hover {
+  cursor: pointer;
+  animation: goofy 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes goofy {
+  0% {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.2, 0.7);
+  }
+  60% {
+    transform: scale(0.8, 1.2);
+  }
+  80% {
+    transform: scale(1.1, 0.9);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
 </style>
