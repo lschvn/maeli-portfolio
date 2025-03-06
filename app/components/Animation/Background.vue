@@ -9,8 +9,8 @@ div.bg {
   width: 400vw;
   animation: noise 2s steps(10) infinite;
   position: fixed;
-  top: -200vw;
-  left: -200vh;
+  top: -200vh;
+  left: -200vw;
   z-index: 300;
   background-color: var(--background-color);
   pointer-events: none;
