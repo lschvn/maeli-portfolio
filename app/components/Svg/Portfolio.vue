@@ -202,17 +202,14 @@ onMounted(() => {
 
   headEyeOpen.addEventListener('mouseenter', (e) => {
     if(!(e.target as HTMLElement).classList.contains('hoverable')) {
-      return
+      return;
     }
-    goofyAnimation.play()
-  })
+    goofyAnimation.restart();
+  });
 
   headEyeOpen.addEventListener('mouseleave', () => {
-    if(!goofyAnimation.isActive()) {
-      return
-    }
-    goofyAnimation.reverse()
-  })
+    goofyAnimation.reverse();
+  });
 })
 </script>
 <style lang="css" scoped>
