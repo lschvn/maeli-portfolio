@@ -80,9 +80,39 @@
   </section>
 </template>
 <script setup lang="ts">
-import {gsap} from "gsap"
+import { gsap } from "gsap"
 
 onMounted(() => {
+
+  const goofyAnimation = gsap.timeline({ paused: true })
+  .set('.head-eye-open', {
+    cursor: 'pointer'
+  })
+  .to('.head-eye-open', {
+    scale: '0.45, 0.45',
+    duration: 0,
+  })
+  .to('.head-eye-open', {
+    scale: '0.54, 0.32',
+    duration: 0.24,
+    ease: 'power1.inOut'
+  })
+  .to('.head-eye-open', {
+    scale: '0.36, 0.54',
+    duration: 0.24,
+    ease: 'power1.inOut'
+  })
+  .to('.head-eye-open', {
+    scale: '0.50, 0.41',
+    duration: 0.16,
+    ease: 'power1.inOut'
+  })
+  .to('.head-eye-open', {
+    scale: '0.45, 0.45',
+    duration: 0.16,
+    ease: 'power1.inOut'
+  });
+
   const headEyeOpen = document.querySelector('.head-eye-open')
   const headEyeClose = document.querySelector('.head-eye-close')
   const container = document.querySelector('.main-head-svg-container')
@@ -146,7 +176,10 @@ onMounted(() => {
     x: -537,
     y: -396,
     rotate: -4,
-    transformOrigin: "center center"
+    transformOrigin: "center center",
+    onComplete: () => {
+      headEyeOpen.classList.add('hoverable')
+    }
   });
   //translate(-537.15px, -396.45px) scale(0.5, 0.5) rotate(-4deg);
 
@@ -166,13 +199,26 @@ onMounted(() => {
     duration: 5,
     ease: 'none'
   })
+
+  headEyeOpen.addEventListener('mouseenter', (e) => {
+    if(!(e.target as HTMLElement).classList.contains('hoverable')) {
+      return
+    }
+    goofyAnimation.play()
+  })
+
+  headEyeOpen.addEventListener('mouseleave', () => {
+    if(!goofyAnimation.isActive()) {
+      return
+    }
+    goofyAnimation.reverse()
+  })
 })
 </script>
 <style lang="css" scoped>
-.main-head-svg-container {
+.main-head-svg-container, .portfolio-main {
   opacity: 0;
 }
-
 section {
   display: flex;
   justify-content: center;
@@ -186,10 +232,6 @@ section {
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: center center;
-}
-.head-eye-open:hover {
-  cursor: pointer;
-  animation: goofy 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
 
 @keyframes goofy {
