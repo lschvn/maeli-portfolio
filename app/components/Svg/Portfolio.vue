@@ -83,51 +83,26 @@
 import { gsap } from "gsap"
 
 onMounted(() => {
-
+  // Timeline pour l'animation "goofy" au survol
   const goofyAnimation = gsap.timeline({ paused: true })
-  .set('.head-eye-open', {
-    cursor: 'pointer'
-  })
-  .to('.head-eye-open', {
-    scale: '0.45, 0.45',
-    duration: 0,
-  })
-  .to('.head-eye-open', {
-    scale: '0.54, 0.32',
-    duration: 0.24,
-    ease: 'power1.inOut'
-  })
-  .to('.head-eye-open', {
-    scale: '0.36, 0.54',
-    duration: 0.24,
-    ease: 'power1.inOut'
-  })
-  .to('.head-eye-open', {
-    scale: '0.50, 0.41',
-    duration: 0.16,
-    ease: 'power1.inOut'
-  })
-  .to('.head-eye-open', {
-    scale: '0.45, 0.45',
-    duration: 0.16,
-    ease: 'power1.inOut'
-  });
+    .set('.head-eye-open', { cursor: 'pointer' })
+    .to('.head-eye-open', { scale: '0.45, 0.45', duration: 0 })
+    .to('.head-eye-open', { scale: '0.54, 0.32', duration: 0.24, ease: 'power1.inOut' })
+    .to('.head-eye-open', { scale: '0.36, 0.54', duration: 0.24, ease: 'power1.inOut' })
+    .to('.head-eye-open', { scale: '0.50, 0.41', duration: 0.16, ease: 'power1.inOut' })
+    .to('.head-eye-open', { scale: '0.45, 0.45', duration: 0.16, ease: 'power1.inOut' });
 
   const headEyeOpen = document.querySelector('.head-eye-open')
   const headEyeClose = document.querySelector('.head-eye-close')
   const container = document.querySelector('.main-head-svg-container')
-
   const portfolio = document.querySelector('.portfolio-main')
-
   const stars = document.querySelectorAll('.stars path')
 
-  if(!stars) return;
-  if(!portfolio) return;
-  if(!headEyeOpen || !headEyeClose || !container) return;
+  if (!stars || !portfolio || !headEyeOpen || !headEyeClose || !container) return;
   
   const tl = gsap.timeline()
 
-  // Initial setup
+  // Configuration initiale
   tl.set(portfolio, { opacity: 0 })
     .set(headEyeOpen, { opacity: 1, scale: 0.9, zIndex: 100 })
     .set(headEyeClose, { opacity: 0, scale: 0.9 })
@@ -135,53 +110,52 @@ onMounted(() => {
     .set('.stars path', { opacity: 0 })
     .set('.design-portfolio', { opacity: 0 })
     .to(container, { opacity: 1, duration: 0.8 })
-    .to([headEyeOpen, headEyeClose], { 
-      scale: 1, 
-      duration: 1.2, 
-      ease: "power1.out" 
-    }, "-=0.2")
+    .to([headEyeOpen, headEyeClose], { scale: 1, duration: 1.2, ease: "power1.out" }, "-=0.2")
   
-  // Function for natural blinking with head movement
+  // Animation pour le clignement naturel
   const blink = () => {
     return gsap.timeline()
-      // Normal state for 0.5 seconds
       .to({}, { duration: 0.5 })
-      // Quick head movement up and slight rotation during blink
-      .to([headEyeOpen, headEyeClose], { 
-        rotation: 3,
-        duration: 0.1,
-        ease: "power1.inOut"
-      })
-      // Instant close
+      .to([headEyeOpen, headEyeClose], { rotation: 3, duration: 0.1, ease: "power1.inOut" })
       .set(headEyeOpen, { opacity: 0 })
       .set(headEyeClose, { opacity: 1 })
-      // Pause for 0.15 seconds with the eye closed
       .to({}, { duration: 0.15 })
-      // Instant open
       .set(headEyeOpen, { opacity: 1 })
       .set(headEyeClose, { opacity: 0, display: 'none' })
-      // Return head to original position
-      .to([headEyeOpen, headEyeClose], { 
-        rotation: 0,
-        duration: 0.2,
-        ease: "back.out(2)"
-      })
+      .to([headEyeOpen, headEyeClose], { rotation: 0, duration: 0.2, ease: "back.out(2)" })
   };
-
   blink()
 
-  tl.to(headEyeOpen, {
-    scale: 0.45,
-    duration: 0.6,
-    x: -537,
-    y: -396,
-    rotate: -4,
-    transformOrigin: "center center",
-    onComplete: () => {
-      headEyeOpen.classList.add('hoverable')
+  // Utilisation de gsap.matchMedia pour adapter la translation de la tête selon la taille d'écran
+  const mm = gsap.matchMedia();
+  mm.add({
+    isDesktop: "(min-width: 768px)",
+    isMobile: "(max-width: 767px)"
+  }, (context) => {
+    const { isDesktop, isMobile } = context.conditions;
+    if (isDesktop) {
+      tl.to(headEyeOpen, {
+        scale: 0.45,
+        duration: 0.6,
+        x: -537,
+        y: -396,
+        rotate: -4,
+        transformOrigin: "center center",
+        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+      });
+    }
+    if (isMobile) {
+      tl.to(headEyeOpen, {
+        scale: 0.45,
+        duration: 0.6,
+        x: "-30vw",
+        y: "-30vh",
+        rotate: -4,
+        transformOrigin: "center center",
+        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+      });
     }
   });
-  //translate(-537.15px, -396.45px) scale(0.5, 0.5) rotate(-4deg);
 
   tl.to(portfolio, { opacity: 1, duration: 0.6 })
     .to('.design-portfolio', { opacity: 1, duration: 0.3 })
@@ -200,29 +174,61 @@ onMounted(() => {
     ease: 'none'
   })
 
+  // Au survol, redémarrage de l'animation goofy
   headEyeOpen.addEventListener('mouseenter', (e) => {
-    if(!(e.target as HTMLElement).classList.contains('hoverable')) {
-      return;
-    }
+    if (!(e.target as HTMLElement).classList.contains('hoverable')) return;
     goofyAnimation.restart();
   });
 
   headEyeOpen.addEventListener('mouseleave', () => {
     goofyAnimation.reverse();
   });
-})
+});
 </script>
+
 <style lang="css" scoped>
-.main-head-svg-container, .portfolio-main {
+/* On masque initialement les conteneurs */
+.main-head-svg-container,
+.portfolio-main {
   opacity: 0;
 }
+
+/* Le conteneur principal prend toute la hauteur de l'écran */
 section {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
+  padding: 1rem;
 }
 
+/* Rendre les SVG adaptatifs */
+.main-head-svg-container > svg,
+.portfolio-main svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Définir une taille maximale pour les SVG sur grand écran */
+@media (min-width: 768px) {
+  .main-head-svg-container > svg {
+    max-width: 453px;
+  }
+  .portfolio-main svg {
+    max-width: 1042px;
+  }
+}
+
+/* Sur mobile, limiter la largeur en pourcentage */
+@media (max-width: 767px) {
+  .main-head-svg-container > svg,
+  .portfolio-main svg {
+    max-width: 90%;
+  }
+}
+
+/* Centrage absolu des SVG dans leur conteneur */
 .main-head-svg-container > svg {
   position: absolute;
   top: 50%;
@@ -231,21 +237,12 @@ section {
   transform-origin: center center;
 }
 
+/* Animation CSS "goofy" pour référence */
 @keyframes goofy {
-  0% {
-    transform: scale(1, 1);
-  }
-  30% {
-    transform: scale(1.2, 0.7);
-  }
-  60% {
-    transform: scale(0.8, 1.2);
-  }
-  80% {
-    transform: scale(1.1, 0.9);
-  }
-  100% {
-    transform: scale(1, 1);
-  }
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.2, 0.7); }
+  60% { transform: scale(0.8, 1.2); }
+  80% { transform: scale(1.1, 0.9); }
+  100% { transform: scale(1, 1); }
 }
 </style>
