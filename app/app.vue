@@ -2,7 +2,6 @@
   <div>
     <NuxtLoadingIndicator/>
     <NuxtPage />
-    <AnimationBackground />
     <div class="route-animation">
       <div class="overlay"/>
       <div class="overlay-content">
