@@ -40,68 +40,68 @@ const animateIn = () => {
   const routeLetters = document.querySelectorAll('.route-letter');
   const svgElements = document.querySelectorAll('.deco-svg svg');
 
-  tl.to('.overlay', {
-    scaleY: 1,
-    duration: 0.8,
-    ease: "expo.inOut",
-    transformOrigin: 'bottom'
-  })
-  .from(routeLetters, {
-    opacity: 0,
-    y: 40,
-    filter: 'blur(20px)',
-    stagger: { 
-      amount: 0.6,
-      from: 'random' 
-    },
-    ease: "power4.out",
-    duration: 1.2
-  }, 0.2)
-  .from('.deco-svg.left', {
-    x: -100,
-    opacity: 0,
-    filter: 'blur(10px)',
-    duration: 1.2,
-    ease: "power4.out"
-  }, 0.4)
-  .from('.deco-svg.right', {
-    x: 100,
-    opacity: 0,
-    filter: 'blur(10px)',
-    duration: 1.2,
-    ease: "power4.out"
-  }, 0.4)
-  .from(svgElements, {
-    scale: 0.8,
-    opacity: 0,
-    filter: 'blur(8px)',
-    stagger: 0.1,
-    duration: 0.6,
-    ease: "back.out(2)"
-  }, 0.6);
+//   tl.to('.overlay', {
+//     scaleY: 1,
+//     duration: 0.8,
+//     ease: "expo.inOut",
+//     transformOrigin: 'bottom'
+//   })
+//   .from(routeLetters, {
+//     opacity: 0,
+//     y: 40,
+//     filter: 'blur(20px)',
+//     stagger: { 
+//       amount: 0.6,
+//       from: 'random' 
+//     },
+//     ease: "power4.out",
+//     duration: 1.2
+//   }, 0.2)
+//   .from('.deco-svg.left', {
+//     x: -100,
+//     opacity: 0,
+//     filter: 'blur(10px)',
+//     duration: 1.2,
+//     ease: "power4.out"
+//   }, 0.4)
+//   .from('.deco-svg.right', {
+//     x: 100,
+//     opacity: 0,
+//     filter: 'blur(10px)',
+//     duration: 1.2,
+//     ease: "power4.out"
+//   }, 0.4)
+//   .from(svgElements, {
+//     scale: 0.8,
+//     opacity: 0,
+//     filter: 'blur(8px)',
+//     stagger: 0.1,
+//     duration: 0.6,
+//     ease: "back.out(2)"
+//   }, 0.6);
 
-  return tl;
+//   return tl;
 };
 
 const animateOut = () => {
   const routeLetters = document.querySelectorAll('.route-letter');
   const svgElements = document.querySelectorAll('.deco-svg svg');
 
-  return gsap.timeline()
-    .to('.overlay', {
-      scaleY: 0,
-      transformOrigin: 'top',
-      duration: 0.8,
-      ease: "expo.inOut"
-    }, 0.2)
-    .to([routeLetters, svgElements], {
-      opacity: 0,
-      y: -30,
-      filter: 'blur(20px)',
-      stagger: 0.05,
-      duration: 0.6,
-      ease: "power4.in"
-    }, 0);
+  // return gsap.timeline()
+  //   .to('.overlay', {
+  //     scaleY: 0,
+  //     transformOrigin: 'top',
+  //     duration: 0.8,
+  //     ease: "expo.inOut"
+  //   }, 0.2)
+  //   .to([routeLetters, svgElements], {
+  //     opacity: 0,
+  //     y: -30,
+  //     filter: 'blur(20px)',
+  //     stagger: 0.05,
+  //     duration: 0.6,
+  //     ease: "power4.in"
+  //   }, 0);
 };
 
 onMounted(() => {
@@ -111,12 +111,12 @@ onMounted(() => {
     gsap.set('.route-animation', { display: 'block' });
     
     const tl = gsap.timeline();
-    tl.add(animateIn())
-      .add(animateOut(), '+=0.2')
-      .to('.route-animation', { 
-        display: 'none',
-        duration: 0.1 
-      });
+    // tl.add(animateIn())
+    //   .add(animateOut(), '+=0.2')
+    //   .to('.route-animation', { 
+    //     display: 'none',
+    //     duration: 0.1 
+    //   });
 
     await new Promise((resolve) => setTimeout(resolve, 500));
   });
