@@ -1,18 +1,13 @@
 <template>
+  <AppHeader />
   <div class="about-container">
     <header class="about-header">
       <div class="header-left">
         <!-- Placeholder: SVG Étoile grise derrière polaroid -->
-        <div class="star-background-placeholder"></div>
         <div class="polaroid-container">
-          <div class="polaroid-image">
             <!-- Placeholder: Illustration style polaroid -->
             <!-- Simule l'espace pour l'illustration -->
-            <div style="width: 100%; height: 180px; background: #555; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px;">
-              (Placeholder: Visage cartoon + "hi!")
-            </div>
-          </div>
-          <div class="polaroid-date">14/10/2003</div>
+              <AboutMaeliCard />
         </div>
       </div>
       <div class="header-right">
@@ -81,12 +76,7 @@
       <section class="tools-section">
         <h2>MAÎTRISE DES OUTILS</h2>
         <div class="tool-icons">
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->Ps</div>
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->Ai</div>
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->Id</div>
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->Pr</div>
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->Ae</div>
-          <div class="tool-icon"><!-- Placeholder: Icone LOGO -->f</div>
+          <AboutTools />
         </div>
       </section>
     </footer>
@@ -150,11 +140,8 @@
 .polaroid-container {
   position: relative;
   z-index: 1;
-  background-color: white;
   padding: 15px 15px 40px 15px; /* Espace blanc autour, plus large en bas */
-  border: 1px solid #ccc;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-  width: 200px; /* Largeur fixe pour le polaroid */
+  width: calc(30vw); /* Largeur fixe pour le polaroid */
 }
 
 .polaroid-image {
@@ -304,10 +291,6 @@
   font-size: 2rem; /* Taille indicative */
   margin-top: 15px;
   /* Ici viendrait le SVG des étincelles */
-}
-
-.tools-section {
-  /* Pas de styles spécifiques autres que le titre */
 }
 
 .tool-icons {
