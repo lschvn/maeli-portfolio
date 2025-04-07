@@ -1,4 +1,5 @@
 <template>
+  <AppHeader />
   <main>
     <!-- Parcours chaque catégorie (marques, créations, maquettes, etc.) -->
     <div v-for="(projects, category) in PROJECTS" :key="category" class="section">
@@ -18,12 +19,11 @@
             :key="tagIndex" 
             class="tag"
             >
-            {{ tag }}
+            {{ tag.toUpperCase() }}
           </span>
         </div>
           
-          <!-- Affichage du path (slug) -->
-          <p>Path: {{ projet.path }}</p>
+          <!-- Le path n'est plus affiché -->
         </div>
       </section>
     </div>
@@ -31,19 +31,6 @@
 </template>
 
 <style lang="css">
-:root {
-  --text-color: #2D2D2D;
-  --text-color-light: #9EA8AF;
-  --background-color: #DCDCDB;
-
-  --title-font: "Climate Crisis";
-  --text-font: "Poppins", sans-serif;
-}
-
-/* 
-   Conteneur de chaque « section » (Marques, Créations, Maquettes).
-   On laisse un espacement entre chaque bloc.
-*/
 .section {
   margin-bottom: 4rem;
   display: flex;
@@ -63,25 +50,26 @@
   margin-bottom: 2rem;
 }
 
-/* 
+/*
    Style de chaque « card » de projet.
-   On fait un encadré simple (border), 
-   et on positionne la flèche en absolu à droite.
+   On utilise une bordure basse pour séparer les projets.
+   On positionne la flèche en absolu à droite.
 */
 .section section > div {
   position: relative;
-  border: 1px solid var(--text-color-light);
-  padding: 1rem 2rem 1rem 1rem; /* marge plus large à droite pour la flèche */
-  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--text-color); /* Changé de border à border-bottom et couleur */
+  padding: 1.5rem 2.5rem 1.5rem 0; /* Ajusté padding, plus d'espace pour la flèche, pas de padding gauche */
+  margin-bottom: 0; /* Supprimé margin-bottom, géré par le gap du parent */
   width: 100%;
 }
 
-/* Titre du projet */
+/* Titre du projet - Police plus épaisse comme dans l'image */
 .section section > div h2 {
   font-family: var(--title-font);
-  font-size: 1.5rem;
+  font-size: 1.8rem; /* Légèrement plus grand */
+  font-weight: 700; /* Plus épais */
   color: var(--text-color);
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.75rem; /* Marge basse augmentée */
 }
 
 /* Conteneur des tags */
@@ -91,40 +79,35 @@
   margin-bottom: 0.5rem;
 }
 
-/* Style individuel de chaque tag */
+/* Style individuel de chaque tag - Bordure arrondie comme dans l'image */
 .section section .tag {
   font-family: var(--text-font);
   font-size: 0.75rem;
-  color: var(--text-color);
-  border: 1px solid var(--text-color-light);
-  border-radius: 4px;
-  padding: 2px 6px;
+  color: var(--text-color); /* Couleur du texte */
+  border: 1px solid var(--text-color); /* Bordure plus visible */
+  border-radius: 15px; /* Plus arrondi */
+  padding: 3px 10px; /* Padding ajusté */
+  background-color: transparent; /* Pas de fond spécifique */
 }
 
-/* Texte du chemin (slug) du projet */
-.section section> div p {
-  font-family: var(--text-font);
-  font-size: 0.8rem;
-  color: var(--text-color-light);
-  margin: 0;
-}
+/* Le style pour le paragraphe du path est supprimé car le paragraphe l'est aussi */
 
-/* Flèche décorative placée en absolu sur la droite de la « card » */
+/* Flèche décorative (↗) placée en absolu sur la droite de la « card » */
 .section section > div::after {
-  content: "→";
+  content: "↗"; /* Changé la flèche */
   position: absolute;
-  right: 1rem;
+  right: 0; /* Collé à droite */
   top: 50%;
   transform: translateY(-50%);
-  font-family: var(--title-font);
-  font-size: 1.5rem;
+  font-family: var(--title-font); /* Garde la police titre */
+  font-size: 2rem; /* Flèche plus grande */
   color: var(--text-color);
 }
 
-.project-section{
+.project-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  /* Le gap est implicitement géré par le padding/border des divs enfants */
   width: 100%;
 }
 
