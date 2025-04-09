@@ -13,7 +13,7 @@
       <div class="header-right">
         <h1>Hello!</h1>
         <p class="intro-paragraph-1">
-          Je m'appelle <strong>Maëli Grégori</strong> et je suis étudiante en création numérique et plus particulièrement en <strong>graphisme</strong>.
+            Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> et je suis étudiante en création numérique et plus particulièrement en <strong class="highlight">graphisme</strong>.
         </p>
         <p class="intro-paragraph-2">
           J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées, c'est ça que j'aime dans ce domaine. Je suis à l'écoute, organisée et consciencieuse.
@@ -104,7 +104,7 @@
   background-color: var(--background-color);
   font-family: var(--text-font);
   color: var(--text-color);
-  padding: 40px 60px;
+  padding: 60px 60px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -205,7 +205,6 @@
 
 .intro-paragraph-2 {
   font-family: var(--text-font);
-  color: var(--text-color-light);
   font-size: 1rem; /* Plus petit */
   line-height: 1.6;
 }
@@ -228,6 +227,26 @@
   position: relative;
   display: inline-block;
   z-index: 1; /* Add this */
+}
+
+.highlight-name{
+  display: inline-block;
+  position: relative;
+
+  z-index: 1;
+}
+
+.highlight-name::before {
+  content: '';
+  position: absolute;
+  left: -1%;
+  bottom: 6px;
+  height: 10px;
+  width: 102%;
+  background-color: var(--text-color-light);
+  z-index: -1;
+  transform: skewX(-15deg);
+  opacity: 0.7;
 }
 
 /* Effet de soulignement/ombre décalé */
@@ -265,9 +284,9 @@
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -31px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
-  width: 20px;
-  height: 20px;
+  left: -28px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
+  width: 15px;
+  height: 15px;
   background-color: var(--text-color);
   border-radius: 50%;
 }
@@ -275,7 +294,7 @@
 .timeline-item:last-child:after {
   content: '';
   position: absolute;
-  top: 20px;
+  top: 15px;
   left: -22px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
   width: 2px;
   height: 70px;
