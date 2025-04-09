@@ -2,20 +2,21 @@
   <AppHeader />
   <div class="about-container">
     <header class="about-header">
-      <div class="header-left">
-        <!-- Placeholder: SVG Étoile grise derrière polaroid -->
-        <div class="polaroid-container">
-            <!-- Placeholder: Illustration style polaroid -->
-            <!-- Simule l'espace pour l'illustration -->
-              <AboutMaeliCard />
+      <div class="header-left" ref="headerLeft">
+        <!-- L'étoile est gérée par CSS pour le moment -->
+        <div class="polaroid-container" ref="polaroid">
+            <!-- On suppose que AboutMaeliCard est l'illustration -->
+            <AboutMaeliCard />
         </div>
       </div>
       <div class="header-right">
-        <h1>Hello!</h1>
-        <p class="intro-paragraph-1">
+        <!-- Utilisation d'un span pour animer le texte mot par mot ou lettre par lettre si besoin -->
+        <!-- Pour la simplicité, on anime le h1 en entier -->
+        <h1 ref="h1Title">Hello!</h1>
+        <p class="intro-paragraph-1" ref="introP1">
             Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> et je suis étudiante en création numérique et plus particulièrement en <strong class="highlight">graphisme</strong>.
         </p>
-        <p class="intro-paragraph-2">
+        <p class="intro-paragraph-2" ref="introP2">
           J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées, c'est ça que j'aime dans ce domaine. Je suis à l'écoute, organisée et consciencieuse.
         </p>
       </div>
@@ -23,16 +24,17 @@
 
     <main class="main-content">
       <section class="formations-section">
-        <h2>FORMATIONS</h2>
-        <ul class="timeline">
-          <li class="timeline-item">
+        <h2 ref="formationsTitle">FORMATIONS</h2>
+        <ul class="timeline" ref="formationsTimeline">
+          <!-- Suppression des ref individuelles -->
+          <li class="timeline-item formation-item">
             <div class="timeline-date">2021-2024</div>
             <div class="timeline-description">
               Étude de Cycle Web et Multimédia<br />
               à My Digital School
             </div>
           </li>
-          <li class="timeline-item">
+          <li class="timeline-item formation-item">
             <div class="timeline-date">2024-2025</div>
             <div class="timeline-description">
               Bachelor création numérique<br />
@@ -43,21 +45,22 @@
       </section>
 
       <section class="experiences-section">
-        <h2>EXPÉRIENCES</h2>
-        <ul class="timeline">
-          <li class="timeline-item">
+        <h2 ref="experiencesTitle">EXPÉRIENCES</h2>
+        <ul class="timeline" ref="experiencesTimeline">
+          <!-- Suppression des ref individuelles -->
+          <li class="timeline-item experience-item">
             <div class="timeline-date">2017</div>
             <div class="timeline-description">Stage chez Nouveau Regard</div>
           </li>
-          <li class="timeline-item">
+          <li class="timeline-item experience-item">
             <div class="timeline-date">2023</div>
             <div class="timeline-description">Stage effectué à HandyJob</div>
           </li>
-           <li class="timeline-item">
+           <li class="timeline-item experience-item">
             <div class="timeline-date">2024</div>
             <div class="timeline-description">Stage avec Pop'up Garden</div>
           </li>
-          <li class="timeline-item">
+          <li class="timeline-item experience-item">
             <div class="timeline-date">2024-2025</div>
             <div class="timeline-description">Alternance chez M2 Event</div>
           </li>
@@ -67,12 +70,12 @@
 
     <footer class="footer-content">
       <section class="interests-section">
-        <h2>CENTRES D'INTÉRETS</h2>
-        <p>Activités manuelles et artistiques, jeux vidéos, danse, musique</p>
-        <!-- Placeholder: SVG Étincelles grises -->
-        <div class="sparkles-placeholder">
+        <h2 ref="interestsTitle">CENTRES D'INTÉRETS</h2>
+        <p ref="interestsText">Activités manuelles et artistiques, jeux vidéos, danse, musique</p>
+        <div class="sparkles-placeholder" ref="sparkles">
           <svg width="72" height="85" viewBox="0 0 72 85" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M33.6366 26.312C32.8057 26.3349 35.7941 42.0491 27.9419 50.8851C23.1391 56.2933 15.6833 57.5349 10.3926 57.7862C16.2246 56.4608 23.7566 55.821 28.9939 59.9648C37.7076 66.8583 36.2133 83.9513 36.7317 83.9056C37.2273 83.8675 33.4765 68.7474 40.391 61.1378C44.8203 56.2552 52.4209 55.7982 58.4892 56.2857C53.3053 56.2933 45.8876 55.4401 40.8027 50.3366C32.4855 41.9806 34.46 26.2968 33.629 26.3273L33.6366 26.312Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
+            <!-- SVG Path data -->
+             <path d="M33.6366 26.312C32.8057 26.3349 35.7941 42.0491 27.9419 50.8851C23.1391 56.2933 15.6833 57.5349 10.3926 57.7862C16.2246 56.4608 23.7566 55.821 28.9939 59.9648C37.7076 66.8583 36.2133 83.9513 36.7317 83.9056C37.2273 83.8675 33.4765 68.7474 40.391 61.1378C44.8203 56.2552 52.4209 55.7982 58.4892 56.2857C53.3053 56.2933 45.8876 55.4401 40.8027 50.3366C32.4855 41.9806 34.46 26.2968 33.629 26.3273L33.6366 26.312Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
             <path d="M9.27911 21.2847C8.9818 21.2923 10.0492 26.8909 7.25133 30.0368C5.53604 31.964 2.88301 32.4058 1 32.4972C3.08122 32.0249 5.76474 31.7964 7.62487 33.2741C10.7276 35.7269 10.194 41.8206 10.3846 41.8054C10.5599 41.7901 9.22577 36.4048 11.6882 33.6931C13.2662 31.9564 15.9725 31.7888 18.1376 31.964C16.2927 31.964 13.6475 31.6593 11.8407 29.8464C8.87515 26.8681 9.58406 21.2847 9.28674 21.2923L9.27911 21.2847Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
             <path d="M58.0618 1.00762C57.6196 1.02286 59.2053 9.34845 55.0428 14.033C52.4966 16.9047 48.5476 17.5598 45.7422 17.6893C48.8373 16.9885 52.8244 16.6457 55.607 18.8395C60.2268 22.4957 59.434 31.5525 59.7084 31.5297C59.9752 31.5068 57.9855 23.4936 61.6448 19.4565C63.9928 16.8666 68.018 16.6305 71.2428 16.8818C68.4983 16.8818 64.5646 16.4324 61.8659 13.7283C57.4519 9.30275 58.504 0.984787 58.0618 1.00002V1.00762Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
           </svg>
@@ -80,8 +83,10 @@
       </section>
 
       <section class="tools-section">
-        <h2>MAÎTRISE DES OUTILS</h2>
-        <div class="tool-icons">
+        <h2 ref="toolsTitle">MAÎTRISE DES OUTILS</h2>
+        <!-- Supposons que AboutTools génère des éléments (ex: div, span) directement -->
+        <!-- Nous allons cibler ces éléments enfants pour l'animation stagger -->
+        <div class="tool-icons" ref="toolIconsContainer">
           <AboutTools />
         </div>
       </section>
@@ -89,7 +94,123 @@
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from 'vue'
+import { gsap } from 'gsap'
+
+// --- Refs pour les éléments à animer ---
+const headerLeft = ref(null)
+const polaroid = ref(null)
+const h1Title = ref(null)
+const introP1 = ref(null)
+const introP2 = ref(null)
+
+const formationsTitle = ref(null)
+const formationsTimeline = ref(null)
+// Ne plus utiliser formationItems comme ref directe
+// const formationItems = ref([]) 
+let formationItems = []; // Variable standard pour stocker les éléments DOM
+
+const experiencesTitle = ref(null)
+const experiencesTimeline = ref(null)
+// Ne plus utiliser experienceItems comme ref directe
+// const experienceItems = ref([])
+let experienceItems = []; // Variable standard pour stocker les éléments DOM
+
+const interestsTitle = ref(null)
+const interestsText = ref(null)
+const sparkles = ref(null)
+
+const toolsTitle = ref(null)
+const toolIconsContainer = ref(null)
+
+// --- Animation à l'entrée ---
+onMounted(() => {
+  // Sélectionner les éléments qui n'ont pas de ref directe en utilisant querySelector
+  formationItems = document.querySelectorAll('.formation-item');
+  experienceItems = document.querySelectorAll('.experience-item');
+  
+  // Sélectionner les éléments des outils
+  const directToolIcons = toolIconsContainer.value ? Array.from(toolIconsContainer.value.children) : [];
+
+  // --- Initialisation des états (avant animation) ---
+  gsap.set([
+      polaroid.value,
+      h1Title.value,
+      introP1.value,
+      introP2.value,
+      formationsTitle.value,
+      experiencesTitle.value,
+      interestsTitle.value,
+      toolsTitle.value,
+      interestsText.value,
+      sparkles.value,
+      ...formationItems, // Spread les éléments DOM directement
+      ...experienceItems, // Spread les éléments DOM directement
+      ...directToolIcons
+    ],
+    {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
+    }
+  );
+
+   // Cas spécifique pour le polaroid
+  gsap.set(polaroid.value, { scale: 0.9, rotation: -3 });
+  gsap.set(sparkles.value, { scale: 0.5 });
+
+  // --- Création de la Timeline d'animation ---
+  const tl = gsap.timeline({
+    defaults: { duration: 0.8, ease: 'power3.out' }
+  });
+
+  // --- Séquence d'animations ---
+  tl
+    // 1. Header animations
+    .to(polaroid.value, { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 1, ease: 'elastic.out(1, 0.7)' }, 0.2)
+    .to(h1Title.value, { opacity: 1, y: 0, scale: 1 }, 0.5)
+    .to(introP1.value, { opacity: 1, y: 0, scale: 1 }, "<0.2")
+    .to(introP2.value, { opacity: 1, y: 0, scale: 1 }, "<0.2")
+
+    // 2. Main Content animations
+    .to(formationsTitle.value, { opacity: 1, y: 0, scale: 1 }, "-=0.3")
+    .to(formationItems, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.15,
+        duration: 0.6
+      }, "<0.3")
+
+    .to(experiencesTitle.value, { opacity: 1, y: 0, scale: 1 }, "-=0.5")
+    .to(experienceItems, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.15,
+        duration: 0.6
+      }, "<0.3")
+
+    // 3. Footer Content animations
+    .to(interestsTitle.value, { opacity: 1, y: 0, scale: 1 }, "-=0.5")
+    .to(interestsText.value, { opacity: 1, y: 0, scale: 1 }, "<0.2")
+    .to(sparkles.value, { opacity: 1, y: 0, scale: 1, ease: 'back.out(1.7)' }, "<0.1")
+
+    .to(toolsTitle.value, { opacity: 1, y: 0, scale: 1 }, "-=0.6")
+    .to(directToolIcons, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.08,
+        duration: 0.4
+      }, "<0.3");
+});
+
+</script>
+
 <style scoped>
+/* Styles CSS existants (inchangés) */
 /* Variables CSS globales (supposées définies ailleurs, ex: main.css)
 :root {
   --text-color: #2D2D2D;
@@ -109,6 +230,7 @@
   display: flex;
   flex-direction: column;
   gap: 50px; /* Espace entre header, main, footer */
+  overflow-x: hidden; /* Empêche le scroll horizontal potentiel dû aux animations x */
 }
 
 /* Header Section */
@@ -380,7 +502,7 @@
     grid-template-columns: 1fr; /* Passe à une seule colonne */
     gap: 50px;
   }
-  
+
 }
 
 @media (max-width: 768px) {
@@ -413,5 +535,4 @@
     opacity: 0;
   }
 }
-
 </style>
