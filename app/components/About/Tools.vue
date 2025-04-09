@@ -85,4 +85,10 @@ div {
   gap: 1rem;
   align-items: flex-end;
 }
+
+@media screen and (max-width: 768px) {
+  div {
+    flex-wrap: wrap;
+  }
+}
 </style>

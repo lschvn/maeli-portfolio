@@ -70,7 +70,13 @@
         <h2>CENTRES D'INTÉRETS</h2>
         <p>Activités manuelles et artistiques, jeux vidéos, danse, musique</p>
         <!-- Placeholder: SVG Étincelles grises -->
-        <div class="sparkles-placeholder">✨</div>
+        <div class="sparkles-placeholder">
+          <svg width="72" height="85" viewBox="0 0 72 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M33.6366 26.312C32.8057 26.3349 35.7941 42.0491 27.9419 50.8851C23.1391 56.2933 15.6833 57.5349 10.3926 57.7862C16.2246 56.4608 23.7566 55.821 28.9939 59.9648C37.7076 66.8583 36.2133 83.9513 36.7317 83.9056C37.2273 83.8675 33.4765 68.7474 40.391 61.1378C44.8203 56.2552 52.4209 55.7982 58.4892 56.2857C53.3053 56.2933 45.8876 55.4401 40.8027 50.3366C32.4855 41.9806 34.46 26.2968 33.629 26.3273L33.6366 26.312Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
+            <path d="M9.27911 21.2847C8.9818 21.2923 10.0492 26.8909 7.25133 30.0368C5.53604 31.964 2.88301 32.4058 1 32.4972C3.08122 32.0249 5.76474 31.7964 7.62487 33.2741C10.7276 35.7269 10.194 41.8206 10.3846 41.8054C10.5599 41.7901 9.22577 36.4048 11.6882 33.6931C13.2662 31.9564 15.9725 31.7888 18.1376 31.964C16.2927 31.964 13.6475 31.6593 11.8407 29.8464C8.87515 26.8681 9.58406 21.2847 9.28674 21.2923L9.27911 21.2847Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
+            <path d="M58.0618 1.00762C57.6196 1.02286 59.2053 9.34845 55.0428 14.033C52.4966 16.9047 48.5476 17.5598 45.7422 17.6893C48.8373 16.9885 52.8244 16.6457 55.607 18.8395C60.2268 22.4957 59.434 31.5525 59.7084 31.5297C59.9752 31.5068 57.9855 23.4936 61.6448 19.4565C63.9928 16.8666 68.018 16.6305 71.2428 16.8818C68.4983 16.8818 64.5646 16.4324 61.8659 13.7283C57.4519 9.30275 58.504 0.984787 58.0618 1.00002V1.00762Z" stroke="#9EA8AF" stroke-width="1.76205" stroke-miterlimit="10"/>
+          </svg>
+      </div>
       </section>
 
       <section class="tools-section">
@@ -136,12 +142,24 @@
   opacity: 0.6;
 }
 
-
 .polaroid-container {
   position: relative;
   z-index: 1;
   padding: 15px 15px 40px 15px; /* Espace blanc autour, plus large en bas */
   width: calc(30vw); /* Largeur fixe pour le polaroid */
+}
+
+@media (max-width: 992px) {
+  .polaroid-container {
+    width: calc(50vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .polaroid-container {
+    width: calc(80vw);
+    margin-top: 100px;
+  }
 }
 
 .polaroid-image {

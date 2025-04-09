@@ -81,8 +81,13 @@
 </template>
 <script setup lang="ts">
 import { gsap } from "gsap"
+import { onMounted, ref } from "vue"
+
+const isLoaded = ref(false)
 
 onMounted(() => {
+  isLoaded.value = true
+  
   // Timeline pour l'animation "goofy" au survol
   const goofyAnimation = gsap.timeline({ paused: true })
     .set('.head-eye-open', { cursor: 'pointer' })
@@ -129,27 +134,65 @@ onMounted(() => {
   // Utilisation de gsap.matchMedia pour adapter la translation de la tête selon la taille d'écran
   const mm = gsap.matchMedia();
   mm.add({
-    isDesktop: "(min-width: 768px)",
-    isMobile: "(max-width: 767px)"
+    // Plusieurs breakpoints pour améliorer le responsive
+    smallMobile: "(max-width: 480px)",
+    mobile: "(min-width: 481px) and (max-width: 767px)",
+    tablet: "(min-width: 768px) and (max-width: 1023px)",
+    desktop: "(min-width: 1024px) and (max-width: 1439px)",
+    largeDesktop: "(min-width: 1440px)"
   }, (context) => {
-    const { isDesktop, isMobile } = context.conditions;
-    if (isDesktop) {
+    const { smallMobile, mobile, tablet, desktop, largeDesktop } = context.conditions;
+    
+    if (smallMobile) {
       tl.to(headEyeOpen, {
-        scale: 0.45,
+        scale: 0.35,
         duration: 0.6,
-        x: -537,
-        y: -396,
+        x: "-25vw",
+        y: "-25vh",
         rotate: -4,
         transformOrigin: "center center",
         onComplete: () => { headEyeOpen.classList.add('hoverable') }
       });
     }
-    if (isMobile) {
+    else if (mobile) {
+      tl.to(headEyeOpen, {
+        scale: 0.4,
+        duration: 0.6,
+        x: "-30vw",
+        y: "-28vh",
+        rotate: -4,
+        transformOrigin: "center center",
+        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+      });
+    }
+    else if (tablet) {
+      tl.to(headEyeOpen, {
+        scale: 0.42,
+        duration: 0.6,
+        x: "-38vw",
+        y: "-34vh",
+        rotate: -4,
+        transformOrigin: "center center",
+        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+      });
+    }
+    else if (desktop) {
       tl.to(headEyeOpen, {
         scale: 0.45,
         duration: 0.6,
-        x: "-30vw",
-        y: "-30vh",
+        x: "-42vw",
+        y: "-36vh",
+        rotate: -4,
+        transformOrigin: "center center",
+        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+      });
+    }
+    else if (largeDesktop) {
+      tl.to(headEyeOpen, {
+        scale: 0.45,
+        duration: 0.6,
+        x: -537,
+        y: -396,
         rotate: -4,
         transformOrigin: "center center",
         onComplete: () => { headEyeOpen.classList.add('hoverable') }
@@ -183,6 +226,13 @@ onMounted(() => {
   headEyeOpen.addEventListener('mouseleave', () => {
     goofyAnimation.reverse();
   });
+  
+  // Ajout d'un gestionnaire pour le redimensionnement de la fenêtre
+  window.addEventListener('resize', () => {
+    // Forcer une mise à jour de GSAP sur resize pour maintenir le bon positionnement
+    gsap.set(headEyeOpen, {});
+    gsap.set(portfolio, {});
+  });
 });
 </script>
 
@@ -200,7 +250,11 @@ section {
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  padding: 1rem;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
 
 /* Rendre les SVG adaptatifs */
@@ -208,33 +262,103 @@ section {
 .portfolio-main svg {
   width: 100%;
   height: auto;
+  max-height: 100vh;
 }
 
-/* Définir une taille maximale pour les SVG sur grand écran */
-@media (min-width: 768px) {
-  .main-head-svg-container > svg {
-    max-width: 453px;
-  }
-  .portfolio-main svg {
-    max-width: 1042px;
-  }
-}
-
-/* Sur mobile, limiter la largeur en pourcentage */
-@media (max-width: 767px) {
-  .main-head-svg-container > svg,
-  .portfolio-main svg {
-    max-width: 90%;
-  }
+/* Gestionnaire de position pour le conteneur principal du portfolio */
+.portfolio-main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 /* Centrage absolu des SVG dans leur conteneur */
+.main-head-svg-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-head-svg-container > svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transform-origin: center center;
+}
+
+/* Responsive pour différentes tailles d'écran */
+@media (min-width: 1440px) {
+  .main-head-svg-container > svg {
+    max-width: 453px;
+  }
+  .portfolio-main svg {
+    max-width: 1042px;
+    width: 80vw;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .main-head-svg-container > svg {
+    max-width: 420px;
+  }
+  .portfolio-main svg {
+    max-width: 1000px;
+    width: 85vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .main-head-svg-container > svg {
+    max-width: 380px;
+  }
+  .portfolio-main svg {
+    max-width: 900px;
+    width: 90vw;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .main-head-svg-container > svg {
+    max-width: 320px;
+  }
+  .portfolio-main svg {
+    max-width: 90vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-head-svg-container > svg {
+    max-width: 280px;
+  }
+  .portfolio-main svg {
+    max-width: 95vw;
+  }
+  section {
+    padding: 0.5rem;
+  }
+}
+
+/* Support d'orientation pour les mobiles */
+@media (max-height: 600px) and (orientation: landscape) {
+  section {
+    height: auto;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  
+  .portfolio-main svg {
+    max-height: 80vh;
+  }
+  
+  .main-head-svg-container > svg {
+    max-width: 250px;
+  }
 }
 
 /* Animation CSS "goofy" pour référence */
@@ -244,5 +368,9 @@ section {
   60% { transform: scale(0.8, 1.2); }
   80% { transform: scale(1.1, 0.9); }
   100% { transform: scale(1, 1); }
+}
+
+.hoverable {
+  cursor: pointer;
 }
 </style>
