@@ -216,7 +216,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 80px; /* Espace entre les deux colonnes */
 }
-
 /* Styles communs aux titres de section */
 .formations-section h2,
 .experiences-section h2,
@@ -227,7 +226,8 @@
   font-size: 1.8rem;
   margin-bottom: 30px;
   position: relative;
-  display: inline-block; /* Pour que le pseudo-élément soit positionné correctement */
+  display: inline-block;
+  z-index: 1; /* Add this */
 }
 
 /* Effet de soulignement/ombre décalé */
@@ -237,13 +237,13 @@
 .tools-section h2::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: -5px; /* Ajuster la position verticale */
-  height: 8px; /* Hauteur de l'ombre/ligne */
-  width: 100%; /* Largeur complète du titre */
-  background-color: var(--text-color-light); /* Couleur de l'ombre */
-  z-index: -1; /* Derrière le texte */
-  transform: skewX(-15deg); /* Inclinaison légère */
+  left: -4%;
+  bottom: 0px;
+  height: 20px;
+  width: 110%;
+  background-color: var(--text-color-light);
+  z-index: -1;
+  transform: skewX(-15deg);
   opacity: 0.7;
 }
 
@@ -265,19 +265,29 @@
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -11px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
-  top: 5px; /* Ajuster l'alignement vertical */
-  width: 10px;
-  height: 10px;
+  left: -31px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
+  width: 20px;
+  height: 20px;
   background-color: var(--text-color);
   border-radius: 50%;
 }
 
+.timeline-item:last-child:after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: -22px; /* Positionne le point sur la ligne (- moitié largeur + moitié bordure) */
+  width: 2px;
+  height: 70px;
+  z-index: 2;
+  background-color: var(--background-color);
+}
+
 .timeline-date {
   font-family: var(--text-font);
-  font-weight: 600; /* Dates un peu plus grasses */
-  font-size: 1.1rem;
-  color: var(--text-color);
+  font-weight: 900; /* Dates un peu plus grasses */
+  font-size: 1.2rem;
+  color: var(--text-color-light);
   margin-bottom: 5px;
 }
 
@@ -351,15 +361,7 @@
     grid-template-columns: 1fr; /* Passe à une seule colonne */
     gap: 50px;
   }
-  .timeline {
-    padding-left: 15px;
-  }
-  .timeline-item {
-    padding-left: 25px;
-  }
-   .timeline-item::before {
-     left: -9px;
-   }
+  
 }
 
 @media (max-width: 768px) {
@@ -385,6 +387,11 @@
     width: 40px;
     height: 40px;
     font-size: 1rem;
+  }
+
+  .interests-section h2::after,
+  .tools-section h2::after {
+    opacity: 0;
   }
 }
 
