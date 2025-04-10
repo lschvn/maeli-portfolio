@@ -1,4 +1,5 @@
 <template>
+  <AppHeader />
   <main>
     <div class="title-container">
       <h1>
@@ -45,7 +46,7 @@
           <path d="M32.6121 3.7805H22.2263V0.803467H32.6121V3.7805ZM35.1494 18.598C34.5066 20.5263 32.1385 23.0298 27.6053 23.0298C23.072 23.0298 19.3508 20.4587 19.3508 14.6061C19.3508 8.75351 22.8014 5.84413 27.4361 5.84413C32.0708 5.84413 34.7772 8.48287 35.3862 12.4072C35.4877 13.1514 35.5553 14.1663 35.5215 15.5872H23.6133C23.8163 20.3572 28.7893 20.4925 30.4132 18.598H35.1155H35.1494ZM23.7825 12.6778H31.1236C30.9544 10.3774 29.4321 9.39628 27.4699 9.39628C25.3048 9.39628 24.0869 10.5465 23.7825 12.6778ZM9.57388 23.0298H0V0.871127H10.3181C18.4373 1.00645 18.5727 8.92266 14.3439 11.0878C19.4861 12.9484 19.6552 23.0298 9.60772 23.0298H9.57388ZM4.43173 9.70075H9.74304C13.4643 9.70075 14.0394 5.26902 9.26941 5.26902H4.43173V9.70075ZM9.4724 14.1663H4.43173V18.6319H9.37091C13.9041 18.6319 13.6335 14.1663 9.43857 14.1663H9.4724Z" fill="currentColor"/>
         </svg>
         <a href="https://www.behance.net/maeli_g" target="_blank" rel="noopener noreferrer">
-          https://www.behance.net/maeli_g
+          /maeli_g
         </a>
       </div>
       <div class="contact-item">
@@ -54,12 +55,49 @@
           <path d="M6.40949 3.28685C6.40949 5.07983 4.98864 6.50069 3.22948 6.50069C1.47032 6.50069 0.0494493 5.046 0.0494493 3.28685C0.0494493 1.52769 1.47032 0.072998 3.22948 0.072998C4.98864 0.072998 6.40949 1.52769 6.40949 3.28685ZM6.44331 9.1056H0.015625V29.7081H6.44331V9.1056ZM16.7276 9.1056H10.3338V29.7081H16.7276V18.8825C16.7276 12.8607 24.5085 12.3871 24.5085 18.8825V29.7081H30.9362V16.6497C30.9362 6.50069 19.434 6.87282 16.7276 11.8797V9.1056Z" fill="currentColor"/>
         </svg>
         <a href="https://www.linkedin.com/in/maeli-gregori" target="_blank" rel="noopener noreferrer">
-          https://www.linkedin.com/in/maeli-gregori
+          /in/maeli-gregori
         </a>
       </div>
     </section>
   </main>
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { gsap } from 'gsap';
+
+onMounted(() => {
+  // Création d'une timeline GSAP pour enchaîner les animations
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.out' } // Ease par défaut pour un rendu fluide
+  });
+
+  // 1. Animation du titre H1
+  tl.from('.title-container h1', {
+    duration: 1,        // Durée de l'animation
+    opacity: 0,         // Commence invisible
+    y: 50,              // Commence 50px plus bas
+    delay: 0.2          // Petit délai avant de commencer
+  });
+
+  // 2. Animation du SVG (commence un peu avant la fin de l'anim H1)
+  tl.from('.si-vous-voulez', {
+    duration: 0.8,      // Durée
+    opacity: 0,         // Commence invisible
+    y: 20               // Commence 20px plus bas
+  }, "-=0.7");          // Position: commence 0.7s avant la fin de l'animation précédente
+
+  // 3. Animation des items de contact (commence avant la fin de l'anim SVG)
+  // Utilisation de stagger pour un effet décalé
+  tl.from('.contact-item', {
+    duration: 0.6,      // Durée pour chaque item
+    opacity: 0,         // Commence invisible
+    y: 30,              // Commence 30px plus bas
+    stagger: 0.15       // Délai de 0.15s entre chaque '.contact-item'
+  }, "-=0.5");          // Position: commence 0.5s avant la fin de l'animation précédente
+
+});
+</script>
 
 <style scoped>
 /* Styles principaux pour la mise en page et les éléments */
@@ -220,7 +258,6 @@ h1 {
   .contact-links {
     gap: 1.5rem; /* Espacement réduit */
     /* Centre les items sur tablette/mobile (choix de design) */
-    align-items: center;
     width: 100%; /* Prend toute la largeur */
     padding: 0 0.5rem; /* Ajout de padding */
     box-sizing: border-box;
@@ -229,12 +266,10 @@ h1 {
   .contact-item {
     gap: 0.8rem;
     width: 100%; /* Assure que les items prennent la largeur pour le centrage */
-    justify-content: center; /* Centre l'icône et le texte dans l'item */
   }
 
    .contact-item a {
       font-size: clamp(1rem, 2vw + 0.6rem, 1.3rem); /* Taille adaptée */
-      text-align: center; /* Centre le texte si l'item est centré */
   }
 
    .contact-item svg {
@@ -266,7 +301,6 @@ h1 {
   }
 
   .contact-links {
-    align-items: center; /* Confirmé centré */
     gap: 1.2rem;
   }
 
