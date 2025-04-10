@@ -4,7 +4,7 @@
       <h1>
         CONTACTEZ-MOI
       </h1>
-      <!-- The SVG is kept as provided -->
+      <!-- Le SVG est conservé tel quel -->
       <svg class="si-vous-voulez" width="395" height="60" viewBox="0 0 395 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_209_277)">
         <path d="M7.30917 48.4827C7.30917 43.913 12.3684 41.8031 17.6375 41.5932C17.8474 40.8938 17.9173 40.1128 17.9173 39.2035C17.9173 35.4848 14.4085 26.9051 12.3684 26.9051C11.9488 26.9051 8.7197 32.1742 7.58895 33.8645C5.89864 36.3941 2.73952 41.2435 2.11003 42.0129C1.83025 42.2927 1.48054 42.3626 1.20076 42.3626C0.291493 42.3626 0.0117188 41.5233 0.0117188 41.1736C0.0117188 40.8239 0.151606 40.5441 0.22155 40.4741C2.19163 37.9445 5.21086 33.235 6.97111 30.4256C8.59147 27.756 10.7597 24.5969 12.1703 24.5969C16.1104 24.5969 20.3886 33.3749 20.3886 39.2151C20.3886 39.9845 20.3187 40.9754 20.2488 41.6049H20.9482C21.158 41.6748 21.4378 41.6748 21.6476 41.6748C23.1281 41.6748 24.6669 41.3951 25.7976 40.3342C26.0074 40.1244 26.2872 39.9845 26.567 39.9845C27.4763 39.9845 27.826 40.614 27.826 41.2435C27.826 43.5633 23.5361 44.0529 21.6476 44.0529H19.8874C18.6983 47.9231 16.5184 51.9915 12.0187 51.9915C10.1186 51.9915 7.30917 50.8724 7.30917 48.4827ZM12.0187 49.7417C15.0379 49.7417 16.6583 47.0722 17.4277 44.0529C13.8489 44.2627 9.76886 44.6824 9.76886 48.4827C9.76886 49.2521 10.5382 49.7417 12.0187 49.7417Z" fill="#9EA8AF"/>
@@ -63,59 +63,59 @@
 
 <style scoped>
 /* Styles principaux pour la mise en page et les éléments */
-
 main {
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: 100vh;
     width: 100%;
+    margin-top: 100px;
     padding: 4rem 1rem;
-    text-align: center;
-    min-width: max-content;
-    max-width: fit-content;
+    /* Suppression de min-width: max-content; */
+    max-width: fit-content; /* Gardé pour l'instant, mais title-container a un max-width */
+    box-sizing: border-box; /* Inclut padding dans width */
 }
 
 /* Conteneur du titre */
 .title-container {
-  margin-bottom: 6rem; /* Augmentation significative de l'espace en dessous */
+  margin-bottom: 6rem;
   position: relative;
   display: flex;
   flex-direction: column;
+  /* Aligné à droite sur desktop par défaut */
   align-items: flex-end;
-  gap: 1rem; /* Espace entre le H1 et le SVG */
-  width: 90%; /* Limite la largeur pour éviter que le H1 soit trop large */
-  max-width: 1200px; /* Largeur maximale pour les très grands écrans */
+  gap: 0.5rem; /* Espace réduit entre H1 et SVG par défaut */
+  width: 90%; /* Prend 90% de la largeur de son parent (main) */
+  max-width: 1200px; /* Limite la largeur maximale */
+  padding: 0 1rem; /* Ajout de padding horizontal */
+  box-sizing: border-box;
 }
 
 /* Titre Principal (H1) */
 h1 {
-  white-space: nowrap;
   font-family: var(--title-font);
-  /* Augmentation drastique de la taille avec clamp() */
-  font-size: clamp(3rem, 8vw, 6em); /* Beaucoup plus grand et réactif */
+  /* Utilise clamp pour une taille de police fluide */
+  font-size: clamp(2rem, 6.4vw, 4.8rem); /* Taille réactive */
   color: var(--text-color);
-  font-weight: 900; /* Police très grasse */
-  line-height: 0.9; /* Rapproche les lignes si le texte passe sur plusieurs lignes */
+  font-weight: 800;
   text-transform: uppercase;
   margin: 0;
-  letter-spacing: -0.05em; /* Espacement négatif pour resserrer les lettres comme sur l'image */
-  word-break: break-word;
+  width: 100%; /* Prend toute la largeur du conteneur */
+  text-align: left; /* Aligne le texte à gauche dans son espace */
+  /* Suppression du padding-right inutile */
+  white-space: nowrap;
 }
 
 /* Sous-titre SVG */
 .si-vous-voulez {
   display: block;
-  /* Ajustement du positionnement relatif au H1 beaucoup plus grand */
-  margin-top: -1.5rem; /* Peut nécessiter un ajustement fin selon la taille finale du H1 */
-  margin-left: 10%; /* Décalage vers la droite (ajuster si besoin) */
-  max-width: 400px; /* Augmenter légèrement la taille max */
-  width: 50%; /* Pourcentage pour la réactivité */
-  height: auto;
+  margin-top: 0; /* Ajusté, le gap du parent gère l'espace */
+  /* Pas de margin-left par défaut, l'alignement parent gère */
+  max-width: 400px; /* Limite max */
+  width: 50%; /* Largeur relative au conteneur */
+  height: auto; /* Hauteur automatique pour garder les proportions */
   fill: var(--text-color-light);
 }
 
@@ -123,10 +123,12 @@ h1 {
 .contact-links {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Garde l'alignement à gauche */
-  gap: 1.8rem; /* Augmentation de l'espace entre les lignes */
-  width: 100%;
-  margin-top: 2rem; /* Ajoute un peu d'espace après le bloc titre */
+  /* Aligné à gauche par défaut */
+  align-items: flex-start;
+  gap: 1.8rem; /* Espace entre les lignes */
+  width: auto; /* Ajusté à la largeur du contenu */
+  max-width: 100%; /* Empêche le débordement */
+  margin-top: 2rem; /* Espace après le bloc titre */
 }
 
 /* Chaque item de contact */
@@ -138,9 +140,9 @@ h1 {
 
 /* Icônes SVG de contact */
 .contact-item svg {
-  width: 32px; /* Taille légèrement augmentée */
+  width: 32px;
   height: auto;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Empêche l'icône de rétrécir */
   color: var(--text-color-light);
 }
 
@@ -149,80 +151,131 @@ h1 {
   font-family: var(--text-font);
   color: var(--text-color);
   text-decoration: none;
-  /* Taille de texte légèrement augmentée et réactive */
-  font-size: clamp(1.1rem, 1.5vw + 0.8rem, 1.5rem);
+  /* Taille de texte réactive */
+  font-size: clamp(1.1rem, 1.5vw + 0.7rem, 1.5rem); /* Léger ajustement */
   transition: color 0.2s ease, text-decoration 0.2s ease;
-  word-break: break-all;
-  text-align: left; /* Assure l'alignement gauche du texte */
+  /* Gestion du retour à la ligne pour les longs liens */
+  word-break: break-all; /* Coupe n'importe où si nécessaire */
+  overflow-wrap: break-word; /* Préfère couper entre les mots */
+  text-align: left; /* Garde le texte du lien aligné à gauche */
 }
 
 .contact-item a:hover,
 .contact-item a:focus {
-  color: var(--text-color);
+  color: var(--text-color); /* Peut-être une couleur différente au survol ? */
   text-decoration: underline;
   outline: none;
 }
 
-/* Ajustements pour écrans plus petits */
+/* === Media Queries pour la Responsivité === */
+
+/* Tablettes et petits laptops (<= 992px) */
+@media (max-width: 992px) {
+  h1 {
+    font-size: clamp(2.3rem, 7vw, 5rem); /* Taille légèrement réduite */
+  }
+  .si-vous-voulez {
+    width: 60%; /* Un peu plus large en proportion */
+  }
+}
+
+
+/* Tablettes (<= 768px) */
 @media (max-width: 768px) {
+  main {
+    padding: 3rem 1rem; /* Réduction du padding vertical */
+    /* Permet le défilement si le contenu dépasse la hauteur */
+    position: static; /* On enlève fixed pour éviter les pbs de scroll */
+    transform: none;
+    left: auto;
+    min-height: auto; /* Hauteur basée sur le contenu */
+    display: block; /* On revient à un flux normal si besoin */
+  }
+
   .title-container {
-    margin-bottom: 4rem; /* Réduire un peu l'espace */
+    margin-bottom: 4rem;
+    width: 100%; /* Prend toute la largeur */
+    padding: 0 0.5rem; /* Padding horizontal réduit */
+    /* Aligne H1 et SVG à gauche */
+    align-items: flex-start;
+    gap: 1rem; /* Espace un peu plus grand si H1 est sur plusieurs lignes */
   }
 
   h1 {
-    /* Clamp ajuste déjà, mais on pourrait affiner les bornes si nécessaire */
-    letter-spacing: -0.04em; /* Légèrement moins serré si besoin */
+    white-space: normal;
+    font-size: clamp(2rem, 10vw, 3.5rem); /* Taille adaptée aux tablettes */
+    letter-spacing: -0.03em;
+    line-height: 1.2; /* Plus d'espace pour la lisibilité */
+    /* white-space: normal; est maintenant le défaut */
+    text-align: left; /* Confirmé alignement gauche */
   }
 
   .si-vous-voulez {
-    margin-left: 5%;
-    margin-top: -1rem;
-    width: 60%;
+    margin-left: 0; /* Confirmé pas de marge gauche */
+    margin-top: 0.5rem; /* Espace après H1 */
+    width: 70%; /* Plus large en proportion */
     max-width: 300px;
   }
 
   .contact-links {
-    gap: 1.5rem; /* Réduire l'espacement */
-    align-items: center; /* Centrer peut-être sur mobile? Ou garder flex-start */
+    gap: 1.5rem; /* Espacement réduit */
+    /* Centre les items sur tablette/mobile (choix de design) */
+    align-items: center;
+    width: 100%; /* Prend toute la largeur */
+    padding: 0 0.5rem; /* Ajout de padding */
+    box-sizing: border-box;
   }
 
   .contact-item {
     gap: 0.8rem;
+    width: 100%; /* Assure que les items prennent la largeur pour le centrage */
+    justify-content: center; /* Centre l'icône et le texte dans l'item */
   }
 
    .contact-item a {
-     /* Clamp ajuste la taille */
-   }
+      font-size: clamp(1rem, 2vw + 0.6rem, 1.3rem); /* Taille adaptée */
+      text-align: center; /* Centre le texte si l'item est centré */
+  }
 
    .contact-item svg {
-     width: 28px;
+     width: 28px; /* Icônes légèrement plus petites */
    }
 }
 
+/* Mobiles (<= 480px) */
 @media (max-width: 480px) {
   main {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem; /* Encore moins de padding */
+  }
+
+  .title-container {
+    padding: 0 0.2rem;
+    margin-bottom: 3rem;
   }
 
   h1 {
-    /* Ajustement potentiel pour très petits écrans si clamp ne suffit pas */
-     line-height: 1; /* Peut améliorer lisibilité si ça wrap beaucoup */
+    font-size: clamp(1.8rem, 12vw, 2.8rem); /* Encore plus petit */
+    line-height: 1.25;
+    letter-spacing: -0.02em;
   }
 
   .si-vous-voulez {
-     margin-left: 0; /* Centrer */
-     margin-top: -0.5rem;
-     width: 70%;
+     margin-top: 0.8rem; /* Ajustement fin de l'espace */
+     width: 80%; /* Encore plus large proportionnellement */
      max-width: 250px;
   }
 
   .contact-links {
-    align-items: center; /* Centrer sur très petits écrans */
+    align-items: center; /* Confirmé centré */
     gap: 1.2rem;
   }
 
+   .contact-item a {
+      font-size: clamp(0.9rem, 2.5vw + 0.5rem, 1.1rem); /* Adapté aux petits écrans */
+   }
+
   .contact-item svg {
-     width: 24px;
+     width: 24px; /* Icônes plus petites */
    }
 }
 </style>
