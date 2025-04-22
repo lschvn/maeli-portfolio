@@ -3,10 +3,10 @@
     <AppHeader />
     <main>
       <!-- Parcours chaque catégorie (marques, créations, maquettes, etc.) -->
-      <div v-for="(projects, category) in PROJECTS" :key="category" class="section">
-        
+      <div v-for="(projects, category, categoryIndex) in PROJECTS" :key="category" class="section">
+
         <!-- Composant SvgFolder avec le nom de la catégorie -->
-        <SvgFolder class="folder" :text="category.charAt(0).toUpperCase() + category.slice(1)" />
+        <SvgFolder :star-variant="['top-right', 'top-left', 'bottom-left'][categoryIndex % 3]" class="folder" :text="category.charAt(0).toUpperCase() + category.slice(1)" />
         
         <!-- Liste des projets de cette catégorie -->
         <section class="project-section">
@@ -22,9 +22,14 @@
               >
               {{ tag.toUpperCase() }}
             </span>
+
+            
+
+          </div>
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6 10.5a.75.75 0 0 0 .75-.75V3.81l1.97 1.97a.75.75 0 0 0 1.06-1.06L6.53 1.47a.75.75 0 0 0-1.06 0L2.22 4.72a.75.75 0 1 0 1.06 1.06l1.97-1.97v5.94c0 .414.336.75.75.75"/></svg>
           </div>
             
-            <!-- Le path n'est plus affiché -->
           </div>
         </section>
       </div>
@@ -36,7 +41,7 @@
 .section {
   margin-bottom: 4rem;
   display: flex;
-  gap: 1rem;
+  gap: 6rem;
 }
 
 .folder{
@@ -87,7 +92,7 @@
   font-size: 0.75rem;
   color: var(--text-color); /* Couleur du texte */
   border: 1px solid var(--text-color); /* Bordure plus visible */
-  border-radius: 15px; /* Plus arrondi */
+  border-radius: 7px; /* Plus arrondi */
   padding: 3px 10px; /* Padding ajusté */
   background-color: transparent; /* Pas de fond spécifique */
 }
@@ -95,16 +100,6 @@
 /* Le style pour le paragraphe du path est supprimé car le paragraphe l'est aussi */
 
 /* Flèche décorative (↗) placée en absolu sur la droite de la « card » */
-.section section > div::after {
-  content: "↗"; /* Changé la flèche */
-  position: absolute;
-  right: 0; /* Collé à droite */
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--title-font); /* Garde la police titre */
-  font-size: 2rem; /* Flèche plus grande */
-  color: var(--text-color);
-}
 
 .project-section {
   display: flex;
@@ -113,10 +108,121 @@
   width: 100%;
 }
 
+.arrow {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.arrow svg {
+  width: 3rem;
+  height: 3rem;
+  color: var(--text-color);
+  transform: rotate(45deg);
+}
+
 main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 10rem;
+  padding: 6rem;
+}
+
+/* --- Responsive Styles --- */
+
+/* Tablet breakpoint (e.g., <= 992px) */
+@media (max-width: 992px) {
+  main {
+    padding: 4rem; /* Reduce main padding */
+    gap: 8rem;
+  }
+
+  .section {
+    gap: 4rem; /* Reduce gap between folder and projects */
+  }
+
+  .section section > div h2 {
+    font-size: 1.6rem; /* Slightly smaller title */
+  }
+
+  .arrow svg {
+    width: 2.5rem; /* Slightly smaller arrow */
+    height: 2.5rem;
+  }
+}
+
+/* Mobile breakpoint (e.g., <= 768px) */
+@media (max-width: 768px) {
+  main {
+    padding: 3rem 2rem; /* Further reduce padding */
+    gap: 6rem; /* Reduce gap between categories */
+  }
+
+  .section {
+    flex-direction: column; /* Stack folder and projects vertically */
+    gap: 2rem; /* Adjust gap for vertical layout */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  /* Remove the bottom margin added specifically for the folder in horizontal layout */
+  .section > *:first-child {
+     margin-bottom: 0;
+  }
+
+  .folder {
+    max-width: 100%; /* Allow folder to take full width if needed */
+    margin-bottom: 2rem; /* Add space below the folder */
+  }
+
+  .project-section {
+     width: 100%; /* Ensure project section takes full width */
+  }
+
+  .section section > div {
+    padding: 1rem 2rem 1rem 0; /* Adjust padding for smaller screens */
+  }
+
+  .section section > div h2 {
+    font-size: 1.4rem; /* Smaller title for mobile */
+  }
+
+   .section section .tag {
+    font-size: 0.7rem; /* Slightly smaller tags */
+    padding: 2px 8px;
+  }
+
+  .arrow svg {
+    width: 2rem; /* Smaller arrow for mobile */
+    height: 2rem;
+  }
+
+  .arrow {
+     right: 0.5rem; /* Adjust arrow position */
+  }
+}
+
+/* Smaller Mobile breakpoint (e.g., <= 480px) */
+@media (max-width: 480px) {
+   main {
+    padding: 2rem 1rem; /* Minimal padding */
+    gap: 4rem;
+  }
+
+  .section section > div h2 {
+    font-size: 1.3rem; /* Even smaller title */
+  }
+
+   .section section .tag {
+    font-size: 0.65rem; /* Even smaller tags */
+    padding: 2px 6px;
+   }
+
+   .arrow svg {
+    width: 1.8rem; /* Even smaller arrow */
+    height: 1.8rem;
+   }
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div
+:style="{
+    '--star-offset-x': `${starOffsets.x}px`,
+    '--star-offset-y': `${starOffsets.y}px`
+  }">
     <h1>
       {{ props.text }}
     </h1>
@@ -8,21 +12,117 @@
       <path d="M3.10547 51.1782C3.67804 49.7116 4.87342 47.2304 7.29431 44.9401C10.6896 41.7357 14.4766 40.8216 16.0939 40.5303C94.1952 40.4098 172.307 40.2892 250.408 40.1787C252.015 40.249 256.465 40.6408 260.694 43.9256C264.351 46.7583 265.908 50.254 266.49 51.7909" fill="#D9D9D9"/>
       <path d="M3.10547 51.1782C3.67804 49.7116 4.87342 47.2304 7.29431 44.9401C10.6896 41.7357 14.4766 40.8216 16.0939 40.5303C94.1952 40.4098 172.307 40.2892 250.408 40.1787C252.015 40.249 256.465 40.6408 260.694 43.9256C264.351 46.7583 265.908 50.254 266.49 51.7909" stroke="#2D2D2D" stroke-width="2.14" stroke-miterlimit="10"/>
     </svg>
+    <svg class="stars" width="216" height="211" viewBox="0 0 216 211" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M184.482 200.664L114.178 157.363L51.3272 210.882L70.7201 130.597L0.416073 87.2959L82.712 80.9817L102.105 0.696598L133.571 77.0778L215.867 70.7636L153.016 124.283L184.482 200.664Z" fill="#9EA8AF"/>
+    </svg>
   </div>
 </template>
 <script setup lang="ts">
-const props = defineProps(['text'])
+import { computed } from 'vue'
+
+const props = defineProps({
+  text: String,
+  starVariant: {
+    type: String,
+    default: 'top-left'
+  }
+})
+
+const starOffsets = computed(() => {
+  switch (props.starVariant) {
+    case 'top-right':
+      return { x: 80, y: -60 };
+    case 'bottom-left':
+      return { x: -70, y: 90 };
+    case 'top-left':
+    default:
+      return { x: -90, y: -50 };
+  }
+});
 </script>
 <style lang="css" scoped>
 div {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: min-content;
+}
+
+.folder {
+  z-index: 10;
+}
+
+.stars {
+  position: absolute;
+  transform: translate(var(--star-offset-x), var(--star-offset-y));
+  z-index: 5;
 }
 
 div h1 {
   position: absolute;
   font-family: var(--title-font);
   transform: translateY(12.5px);
+  z-index: 15;
+}
+
+/* --- Responsive Styles --- */
+
+/* Tablet breakpoint (e.g., <= 992px) */
+@media (max-width: 992px) {
+  .folder {
+    width: 220px; /* Slightly smaller folder */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .stars {
+    width: 180px; /* Slightly smaller star */
+    height: auto; /* Maintain aspect ratio */
+    /* Adjust star offsets slightly if needed */
+    transform: translate(calc(var(--star-offset-x) * 0.8), calc(var(--star-offset-y) * 0.8));
+  }
+
+  div h1 {
+    font-size: 0.9em; /* Slightly smaller text */
+    transform: translateY(10px); /* Adjust vertical position */
+  }
+}
+
+/* Mobile breakpoint (e.g., <= 768px) */
+@media (max-width: 768px) {
+  /* On mobile, the folder is stacked vertically in projets.vue */
+  /* We might want it slightly larger relative to the container */
+  .folder {
+    width: 180px; /* Smaller folder for mobile */
+  }
+
+  .stars {
+    width: 140px; /* Smaller star */
+     /* Further adjust star offsets */
+    transform: translate(calc(var(--star-offset-x) * 0.6), calc(var(--star-offset-y) * 0.6));
+  }
+
+  div h1 {
+    font-size: 0.8em; /* Smaller text */
+    transform: translateY(8px);
+  }
+}
+
+/* Smaller Mobile breakpoint (e.g., <= 480px) */
+@media (max-width: 480px) {
+  .folder {
+    width: 150px; /* Even smaller folder */
+  }
+
+  .stars {
+    width: 110px; /* Even smaller star */
+     /* Even smaller offsets */
+    transform: translate(calc(var(--star-offset-x) * 0.5), calc(var(--star-offset-y) * 0.5));
+  }
+
+  div h1 {
+    font-size: 0.75em; /* Smallest text */
+    transform: translateY(6px);
+  }
 }
 </style>
