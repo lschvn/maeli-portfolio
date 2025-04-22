@@ -1,5 +1,6 @@
 <template>
-  <AppHeader />
+  <div>
+    <AppHeader />
   <main>
     <div class="title-container">
       <h1>
@@ -60,6 +61,7 @@
       </div>
     </section>
   </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -142,7 +144,6 @@ h1 {
   margin: 0;
   width: 100%; /* Prend toute la largeur du conteneur */
   text-align: left; /* Aligne le texte à gauche dans son espace */
-  /* Suppression du padding-right inutile */
   white-space: nowrap;
 }
 
@@ -211,6 +212,7 @@ h1 {
 @media (max-width: 992px) {
   h1 {
     font-size: clamp(2.3rem, 7vw, 5rem); /* Taille légèrement réduite */
+    white-space: normal; /* Allow wrapping on smaller laptops */
   }
   .si-vous-voulez {
     width: 60%; /* Un peu plus large en proportion */
@@ -240,12 +242,11 @@ h1 {
   }
 
   h1 {
-    white-space: normal;
-    font-size: clamp(2rem, 10vw, 3.5rem); /* Taille adaptée aux tablettes */
+    font-size: clamp(1.8rem, 9vw, 3rem); /* Smaller size for tablets */
     letter-spacing: -0.03em;
     line-height: 1.2; /* Plus d'espace pour la lisibilité */
-    /* white-space: normal; est maintenant le défaut */
     text-align: left; /* Confirmé alignement gauche */
+    white-space: normal;
   }
 
   .si-vous-voulez {
@@ -289,7 +290,7 @@ h1 {
   }
 
   h1 {
-    font-size: clamp(1.8rem, 12vw, 2.8rem); /* Encore plus petit */
+    font-size: clamp(1.5rem, 10vw, 2.2rem); /* Smaller size for mobile */
     line-height: 1.25;
     letter-spacing: -0.02em;
   }

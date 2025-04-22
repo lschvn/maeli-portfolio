@@ -1,33 +1,35 @@
 <template>
-  <AppHeader />
-  <main>
-    <!-- Parcours chaque catégorie (marques, créations, maquettes, etc.) -->
-    <div v-for="(projects, category) in PROJECTS" :key="category" class="section">
-      
-      <!-- Composant SvgFolder avec le nom de la catégorie -->
-      <SvgFolder class="folder" :text="category.charAt(0).toUpperCase() + category.slice(1)" />
-      
-      <!-- Liste des projets de cette catégorie -->
-      <section class="project-section">
-        <div v-for="(projet, index) in projects" :key="index">
-          <h2>{{ projet.name }}</h2>
-          
-          <!-- Tags -->
-          <div class="tags">
-            <span 
-            v-for="(tag, tagIndex) in projet.tags" 
-            :key="tagIndex" 
-            class="tag"
-            >
-            {{ tag.toUpperCase() }}
-          </span>
-        </div>
-          
-          <!-- Le path n'est plus affiché -->
-        </div>
-      </section>
-    </div>
-  </main>
+  <div>
+    <AppHeader />
+    <main>
+      <!-- Parcours chaque catégorie (marques, créations, maquettes, etc.) -->
+      <div v-for="(projects, category) in PROJECTS" :key="category" class="section">
+        
+        <!-- Composant SvgFolder avec le nom de la catégorie -->
+        <SvgFolder class="folder" :text="category.charAt(0).toUpperCase() + category.slice(1)" />
+        
+        <!-- Liste des projets de cette catégorie -->
+        <section class="project-section">
+          <div v-for="(projet, index) in projects" :key="index">
+            <h2>{{ projet.name }}</h2>
+            
+            <!-- Tags -->
+            <div class="tags">
+              <span 
+              v-for="(tag, tagIndex) in projet.tags" 
+              :key="tagIndex" 
+              class="tag"
+              >
+              {{ tag.toUpperCase() }}
+            </span>
+          </div>
+            
+            <!-- Le path n'est plus affiché -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style lang="css">

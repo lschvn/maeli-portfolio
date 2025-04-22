@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLoadingIndicator/>
-    <NuxtPage />
+
     <div class="route-animation">
       <div class="overlay"/>
       <div class="overlay-content">
@@ -30,6 +30,7 @@
         </div>
       </div>
     </div>
+    <NuxtPage />
   </div>
 </template>
 <script setup lang="ts">
@@ -104,23 +105,23 @@ const animateOut = () => {
   //   }, 0);
 };
 
-onMounted(() => {
-  const router = useRouter();
+// onMounted(() => {
+//   const router = useRouter();
 
-  router.beforeEach(async () => {
-    gsap.set('.route-animation', { display: 'block' });
+//   router.beforeEach(async () => {
+//     gsap.set('.route-animation', { display: 'block' });
     
-    const tl = gsap.timeline();
-    // tl.add(animateIn())
-    //   .add(animateOut(), '+=0.2')
-    //   .to('.route-animation', { 
-    //     display: 'none',
-    //     duration: 0.1 
-    //   });
+//     const tl = gsap.timeline();
+//     // tl.add(animateIn())
+//     //   .add(animateOut(), '+=0.2')
+//     //   .to('.route-animation', { 
+//     //     display: 'none',
+//     //     duration: 0.1 
+//     //   });
 
-    await new Promise((resolve) => setTimeout(resolve, 500));
-  });
-});
+//     await new Promise((resolve) => setTimeout(resolve, 500));
+//   });
+// });
 </script>
 <style lang="css" scoped>
 .route-animation {
