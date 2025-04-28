@@ -37,6 +37,40 @@
   </div>
 </template>
 
+<script setup>
+import { onMounted } from 'vue'
+import gsap from 'gsap'
+
+onMounted(() => {
+  // Animation sur chaque section (catégorie)
+  gsap.from(document.querySelectorAll('.section'), {
+    opacity: 0,
+    y: 40,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power2.out'
+  })
+  // Animation sur chaque dossier (folder)
+  gsap.from(document.querySelectorAll('.folder'), {
+    opacity: 0,
+    x: -40,
+    duration: 0.7,
+    stagger: 0.2,
+    delay: 0.2,
+    ease: 'power2.out'
+  })
+  // Animation sur chaque projet (card)
+  gsap.from(document.querySelectorAll('.project-section > div'), {
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    stagger: 0.08,
+    delay: 0.4,
+    ease: 'power2.out'
+  })
+})
+</script>
+
 <style lang="css">
 .section {
   margin-bottom: 4rem;
