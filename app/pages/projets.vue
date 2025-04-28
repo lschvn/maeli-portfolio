@@ -23,8 +23,6 @@
               {{ tag.toUpperCase() }}
             </span>
 
-            
-
           </div>
           <div class="arrow">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6 10.5a.75.75 0 0 0 .75-.75V3.81l1.97 1.97a.75.75 0 0 0 1.06-1.06L6.53 1.47a.75.75 0 0 0-1.06 0L2.22 4.72a.75.75 0 1 0 1.06 1.06l1.97-1.97v5.94c0 .414.336.75.75.75"/></svg>
@@ -98,10 +96,29 @@ onMounted(() => {
 */
 .section section > div {
   position: relative;
-  border-bottom: 1px solid var(--text-color); /* Changé de border à border-bottom et couleur */
-  padding: 1.5rem 2.5rem 1.5rem 0; /* Ajusté padding, plus d'espace pour la flèche, pas de padding gauche */
-  margin-bottom: 0; /* Supprimé margin-bottom, géré par le gap du parent */
+  border-bottom: 1px solid var(--text-color);
+  padding: 1.5rem 2.5rem 1.5rem 0;
+  margin-bottom: 0;
   width: 100%;
+  transition:
+    box-shadow 0.28s cubic-bezier(.4,0,.2,1),
+    transform 0.28s cubic-bezier(.4,0,.2,1),
+    background 0.22s,
+    border-color 0.22s;
+  background: transparent;
+}
+
+.section section > div:hover h2 {
+  color: var(--text-color-light);
+  letter-spacing: 0.5px;
+  transition: color 0.18s, letter-spacing 0.18s;
+}
+
+.section section > div:hover .arrow svg {
+  filter: drop-shadow(0 2px 12px rgba(46,46,46,0.13));
+  color: var(--text-color-light);
+  opacity: 1;
+  transition: color 0.18s, filter 0.18s, opacity 0.18s;
 }
 
 /* Titre du projet - Police plus épaisse comme dans l'image */
