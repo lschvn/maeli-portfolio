@@ -11,22 +11,26 @@
         <!-- Liste des projets de cette catégorie -->
         <section class="project-section">
           <div v-for="(projet, index) in projects" :key="index">
-            <h2>{{ projet.name }}</h2>
-            
-            <!-- Tags -->
-            <div class="tags">
-              <span 
-              v-for="(tag, tagIndex) in projet.tags" 
-              :key="tagIndex" 
-              class="tag"
-              >
-              {{ tag.toUpperCase() }}
-            </span>
+            <NuxtLink :to="`/projets/${projet.path}`" class="project-card">
 
-          </div>
-          <div class="arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6 10.5a.75.75 0 0 0 .75-.75V3.81l1.97 1.97a.75.75 0 0 0 1.06-1.06L6.53 1.47a.75.75 0 0 0-1.06 0L2.22 4.72a.75.75 0 1 0 1.06 1.06l1.97-1.97v5.94c0 .414.336.75.75.75"/></svg>
-          </div>
+              <h2>{{ projet.name }}</h2>
+            
+              <!-- Tags -->
+              <div class="tags">
+                <span 
+                v-for="(tag, tagIndex) in projet.tags" 
+                :key="tagIndex" 
+                class="tag"
+                >
+                {{ tag.toUpperCase() }}
+              </span>
+
+            </div>
+            <div class="arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="currentColor" d="M6 10.5a.75.75 0 0 0 .75-.75V3.81l1.97 1.97a.75.75 0 0 0 1.06-1.06L6.53 1.47a.75.75 0 0 0-1.06 0L2.22 4.72a.75.75 0 1 0 1.06 1.06l1.97-1.97v5.94c0 .414.336.75.75.75"/></svg>
+            </div>
+
+            </NuxtLink>
             
           </div>
         </section>
