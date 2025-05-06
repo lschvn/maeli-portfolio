@@ -44,8 +44,6 @@ import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// Assure-toi que ce chemin est correct pour ton projet Nuxt et que PROJECTS est bien typé
-// et contient la nouvelle propriété "img: number" pour chaque projet.
 import { PROJECTS } from '~/utils/constants';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -53,40 +51,29 @@ gsap.registerPlugin(ScrollTrigger);
 const route = useRoute();
 const routeName = computed(() => route.params.name as string);
 
-// --- Récupération des données du projet ---
 const projet = computed(() => {
   if (!routeName.value) return null;
-  // La structure de PROJECTS est { "Category1": [projet1, projet2], "Category2": [...] }
-  // et chaque projet a { name, tags, path, description, img }
   const allProjects = Object.values(PROJECTS).flat();
   return allProjects.find(p => p.path === routeName.value) || null;
 });
 
-// --- Références DOM ---
 const scrollWrapperEl = ref<HTMLElement | null>(null);
 const panelsContainerEl = ref<HTMLElement | null>(null);
-
-// --- GSAP Context ---
 let gsapCtx: gsap.Context | null = null;
 
-// --- Gestion des Images ---
 function handleImageLoad(event: Event) {
-  const img = event.target as HTMLImageElement;
-  // Optionnel: Action si l'image charge correctement
-  // Par exemple, forcer un rafraîchissement si les dimensions n'étaient pas connues
-  // ScrollTrigger.refresh(); // Peut être coûteux, à utiliser avec précaution
+  // Optionnel: forcer un rafraîchissement si les dimensions n'étaient pas connues
+  // ScrollTrigger.refresh(); // Peut être coûteux
 }
 
 function handleImageError(event: Event) {
   const img = event.target as HTMLImageElement;
   if (!img) return;
-
   const panel = img.closest('.panel.image-panel') as HTMLElement | null;
   if (panel) {
     if (panel.style.display !== 'none') {
       console.warn(`Image n'a pas pu charger: ${img.src}. Masquage du panneau parent.`);
       panel.style.display = 'none';
-      // Rafraîchit ScrollTrigger pour qu'il prenne en compte la disparition du panneau
       ScrollTrigger.refresh(true);
     }
   } else {
@@ -94,118 +81,159 @@ function handleImageError(event: Event) {
   }
 }
 
-// --- Cycle de vie Vue / GSAP ---
 onMounted(() => {
-  // Attend que le DOM soit pleinement rendu et que `projet` soit potentiellement chargé.
   nextTick(() => {
-    if (!scrollWrapperEl.value || !panelsContainerEl.value || !projet.value) {
-      // Si projet est null, il n'y aura probablement pas assez de panneaux pour scroller.
-      // GSAP ne sera pas initialisé pour le scroll horizontal si pas de projet ou de panneaux.
-      console.log("Slider GSAP : Wrapper, conteneur de panneaux, ou données projet manquantes. Le slider horizontal ne sera pas activé.");
+    if (!scrollWrapperEl.value || !panelsContainerEl.value) {
+      console.log("Slider GSAP : Wrapper ou conteneur de panneaux manquants.");
       return;
     }
 
     gsapCtx = gsap.context(() => {
-      const panels: HTMLElement[] = gsap.utils.toArray('.panel', panelsContainerEl.value);
-
-      if (panels.length <= 1) {
-        console.log("Slider GSAP : Pas assez de panneaux pour l'animation de scroll horizontal.");
-        return; // Pas besoin de slider s'il n'y a qu'un panneau ou moins
-      }
-
-      const getScrollAmount = () => {
-        if (!panelsContainerEl.value || !scrollWrapperEl.value) return 0;
-        // S'assurer que les panneaux cachés (display: none) ne comptent pas dans scrollWidth
-        let totalWidth = 0;
-        panels.forEach(panel => {
-          if (getComputedStyle(panel).display !== 'none') {
-            totalWidth += panel.offsetWidth;
+      // Utilisation de ScrollTrigger.matchMedia pour la responsivité
+      ScrollTrigger.matchMedia({
+        // Configuration pour Desktop (scroll horizontal)
+        "(min-width: 769px)": function() {
+          console.log("Activation du scroll horizontal GSAP pour desktop.");
+          if (!projet.value) {
+            console.log("GSAP Desktop: Données projet manquantes. Le slider horizontal ne sera pas activé.");
+            return;
           }
-        });
-        // Ou plus simplement, si .panels-container a width: max-content et gère bien les enfants cachés:
-        // return panelsContainerEl.value.scrollWidth - scrollWrapperEl.value.clientWidth;
-        // Cependant, pour être sûr avec les panneaux cachés dynamiquement :
-        return totalWidth - scrollWrapperEl.value.clientWidth;
-      };
 
-      // Animation de scroll horizontal
-      gsap.to(panelsContainerEl.value, {
-        x: () => `-${getScrollAmount()}px`,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: scrollWrapperEl.value,
-          pin: true,
-          scrub: 1,
-          start: 'top top',
-          end: () => `+=${getScrollAmount()}`,
-          invalidateOnRefresh: true, // Crucial pour la réactivité
-          // markers: process.env.NODE_ENV === 'development', // Affiche les marqueurs en dev
+          const panels: HTMLElement[] = gsap.utils.toArray('.panel', panelsContainerEl.value);
+          if (panels.length <= 1) {
+            console.log("GSAP Desktop: Pas assez de panneaux pour l'animation de scroll horizontal.");
+            return;
+          }
+
+          const getScrollAmount = () => {
+            if (!panelsContainerEl.value || !scrollWrapperEl.value) return 0;
+            let totalWidth = 0;
+            panels.forEach(panel => {
+              if (getComputedStyle(panel).display !== 'none') {
+                totalWidth += panel.offsetWidth;
+              }
+            });
+            return totalWidth - scrollWrapperEl.value.clientWidth;
+          };
+          
+          // S'assurer que le conteneur de panneaux est bien en flex row pour desktop
+          if (panelsContainerEl.value) {
+            panelsContainerEl.value.style.flexDirection = 'row';
+            panelsContainerEl.value.style.width = 'max-content'; // restaurer pour desktop
+          }
+
+
+          gsap.to(panelsContainerEl.value, {
+            x: () => `-${getScrollAmount()}px`,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: scrollWrapperEl.value,
+              pin: true,
+              scrub: 1,
+              start: 'top top',
+              end: () => `+=${getScrollAmount()}`,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          ScrollTrigger.create({
+            trigger: scrollWrapperEl.value,
+            start: 'top top',
+            end: () => `+=${getScrollAmount()}`,
+            toggleClass: { targets: 'body', className: 'is-scrolling-horizontal' },
+            invalidateOnRefresh: true,
+          });
+
+          // Fonction de nettoyage pour ce breakpoint (sera appelée si la media query ne correspond plus)
+          return () => {
+            console.log("Désactivation du scroll horizontal GSAP (passage mobile ou démontage).");
+            // GSAP s'occupe de tuer les animations/triggers de ce contexte via gsapCtx.revert()
+            // mais on peut vouloir retirer la classe du body manuellement si besoin immédiat
+            document.body.classList.remove('is-scrolling-horizontal');
+            // Rétablir les styles du conteneur si nécessaire (bien que les CSS media queries devraient le faire)
+            if (panelsContainerEl.value) {
+               gsap.set(panelsContainerEl.value, {clearProps: "x,width,flexDirection"});
+            }
+          };
         },
+
+        // Configuration pour Mobile (scroll vertical standard)
+        "(max-width: 768px)": function() {
+          console.log("Mode mobile activé : GSAP scroll horizontal désactivé.");
+          // GSAP ne fait rien ici pour le scroll. Les CSS s'occupent de l'affichage vertical.
+          // On s'assure que le body n'a pas la classe de scroll horizontal
+          document.body.classList.remove('is-scrolling-horizontal');
+          
+          // S'assurer que le conteneur de panneaux est bien en flex column pour mobile
+          // et que sa transformation X est nulle.
+          if (panelsContainerEl.value) {
+            // Les styles CSS via media query devraient gérer ça,
+            // mais on peut forcer ici pour être sûr que GSAP ne laisse pas de traces.
+            gsap.set(panelsContainerEl.value, { x: 0, clearProps: "width" });
+            panelsContainerEl.value.style.flexDirection = 'column'; // Géré par CSS, mais peut être forcé
+          }
+          // Fonction de nettoyage (si on passe de mobile à desktop)
+          return () => {
+            console.log("Passage de mobile à desktop, préparation pour GSAP.");
+             if (panelsContainerEl.value) {
+               gsap.set(panelsContainerEl.value, {clearProps: "flexDirection"}); // Laisse Desktop gérer
+            }
+          };
+        }
       });
-
-      // Optionnel : classe sur le body
-      ScrollTrigger.create({
-        trigger: scrollWrapperEl.value,
-        start: 'top top',
-        end: () => `+=${getScrollAmount()}`,
-        toggleClass: { targets: 'body', className: 'is-scrolling-horizontal' },
-        invalidateOnRefresh: true,
-      });
-
-      console.log("Slider GSAP : Scroll horizontal initialisé.");
-
     }, scrollWrapperEl.value); // Scope du contexte GSAP
   });
 });
 
 onUnmounted(() => {
   gsapCtx?.revert(); // Nettoie toutes les animations et ScrollTriggers créés dans le contexte
-  document.body.classList.remove('is-scrolling-horizontal');
+  document.body.classList.remove('is-scrolling-horizontal'); // Sécurité
   console.log("Slider GSAP : Contexte annulé et nettoyage effectué.");
 });
 </script>
 
 <style scoped>
-:global(html), :global(body) {
-  overflow-x: hidden !important;
-}
+/* Styles globaux pour desktop par défaut */
 :global(body.is-scrolling-horizontal) {
-  /* Optionnel: styles pour le body pendant le scroll horizontal */
-  /* par exemple, pour empêcher le scroll vertical de la page principale si nécessaire,
-     mais GSAP pin s'en charge normalement pour le wrapper. */
+  overflow-x: hidden !important; /* Empêche le scroll horizontal de la page pendant le pin GSAP */
 }
 
 .horizontal-scroll-wrapper {
   width: 100%;
+  /* Desktop: hauteur fixe pour le pinning */
   height: 100vh;
-  overflow: hidden; /* Cache le débordement horizontal natif */
-  position: relative; /* Nécessaire pour le pinning GSAP */
+  overflow: hidden; /* Cache le débordement horizontal natif sur desktop */
+  position: relative; /* Nécessaire pour le pinning GSAP sur desktop */
 }
 
 .panels-container {
+  /* Desktop: flex row pour scroll horizontal */
   display: flex;
   flex-wrap: nowrap;
-  width: max-content; /* S'adapte à la largeur totale des panneaux enfants */
-  height: 100%;
-  will-change: transform; /* Optimisation pour l'animation de transformation */
+  flex-direction: row; /* Défaut pour desktop */
+  width: max-content; /* S'adapte à la largeur totale des panneaux enfants sur desktop */
+  height: 100%; /* Prend toute la hauteur du wrapper sur desktop */
+  will-change: transform; /* Optimisation pour l'animation de transformation sur desktop */
 }
 
 .panel {
-  height: 100%; /* Tous les panneaux prennent toute la hauteur */
-  flex-shrink: 0; /* Empêche les panneaux de rétrécir */
+  /* Desktop: hauteur 100% du container */
+  height: 100%;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  position: relative; /* Pour le .scroll-hint à l'intérieur */
+  position: relative;
 }
 
 .info-panel {
-  width: 85vw; /* Largeur du panneau d'info */
-  max-width: 700px; /* Limite pour la lisibilité */
-  padding: 3vw 5vw; /* Espace intérieur */
-  background-color: #fff; /* Fond pour le différencier */
-  overflow-y: auto; /* Si le contenu de l'info est trop long */
+  /* Desktop: largeur spécifique */
+  width: 85vw;
+  max-width: 700px;
+  padding: 3vw 5vw;
+  background-color: #fff;
+  overflow-y: auto; /* Pour le contenu long sur desktop */
 }
 
 .info-content {
@@ -257,21 +285,83 @@ onUnmounted(() => {
 }
 
 .image-panel {
-  /* La largeur sera déterminée par l'image à l'intérieur ou par le viewport si l'image est plus petite.
-     Pas de padding pour que l'image puisse s'étendre complètement. */
   padding: 0;
-  background-color: #e9e9e9; /* Fond visible si l'image est plus petite ou transparente */
-  /* display:flex, align-items, justify-content hérités de .panel centrent l'image */
+  background-color: #e9e9e9;
 }
 
 .image-panel img {
   display: block;
-  /* Comportement clé pour le dimensionnement de l'image : */
-  max-width: 100%;   /* L'image ne dépassera pas la largeur de son conteneur (implicitement la largeur de la fenêtre si l'image est très large) */
-  max-height: 100%; /* L'image ne dépassera pas la hauteur de son conteneur (100vh) */
-  width: auto;       /* La largeur s'adapte pour maintenir le ratio d'aspect */
-  height: auto;      /* La hauteur s'adapte pour maintenir le ratio d'aspect */
-  object-fit: contain; /* Équivalent à la combinaison max-width/max-height/auto width-height pour ce cas */
-  /* object-fit: cover; /* Alternative si tu veux que l'image remplisse toujours, quitte à la couper */
+  /* Desktop: l'image s'adapte au panneau de 100vh */
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --- STYLES RESPONSIVES POUR MOBILE (max-width: 768px) --- */
+@media (max-width: 768px) {
+  /* On ne veut plus de body.is-scrolling-horizontal sur mobile */
+  :global(body.is-scrolling-horizontal) {
+    overflow-x: auto !important; /* ou visible */
+  }
+  :global(html), :global(body) {
+    overflow-x: hidden !important; /* S'assurer que la page globale n'a pas de scroll X non désiré */
+  }
+
+
+  .horizontal-scroll-wrapper {
+    height: auto; /* La hauteur s'adapte au contenu */
+    overflow: visible; /* Laisse le scroll naturel de la page se faire */
+    position: static; /* Pas de pinning */
+  }
+
+  .panels-container {
+    flex-direction: column; /* Les panneaux s'empilent verticalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    height: auto; /* La hauteur s'adapte au contenu */
+    will-change: auto; /* Plus de transformation animée par GSAP ici */
+    /* Assurer qu'aucune transformation résiduelle de GSAP n'est appliquée */
+    transform: none !important;
+  }
+
+  .panel {
+    width: 100% !important; /* Tous les panneaux prennent toute la largeur */
+    height: auto; /* La hauteur s'adapte au contenu de chaque panneau */
+    /* Pour le padding sur mobile, on peut le mettre ici ou spécifiquement */
+    padding: 0; /* Reset padding général, sera géré par info-panel et image-panel si besoin */
+  }
+
+  .info-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100% !important; /* Prend toute la largeur */
+    max-width: none; /* Annule la max-width desktop */
+    height: 50vh;
+    padding: 30px 30px; /* Ajustement du padding pour mobile */
+    overflow-y: visible; /* Le scroll se fait sur la page entière */
+  }
+  .info-content h1 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem); /* Taille de titre ajustée pour mobile */
+  }
+  .info-content p {
+    font-size: clamp(0.9rem, 4vw, 1rem); /* Taille de texte ajustée pour mobile */
+  }
+
+  .scroll-hint {
+    display: none; /* Pas de scroll horizontal, donc pas d'indicateur */
+  }
+
+  .image-panel img {
+    width: 100%; /* L'image prend toute la largeur de son conteneur (.image-panel) */
+    height: auto; /* La hauteur s'ajuste pour garder le ratio de l'image */
+    max-width: 100%; /* Redondant mais sûr */
+    max-height: none; /* Annule la contrainte de hauteur max desktop */
+    object-fit: cover; /* Ou 'contain', selon si vous voulez remplir ou afficher entièrement.
+                           'cover' avec width:100% et height:auto va s'assurer que l'image couvre
+                           la largeur et ajuste sa hauteur, ce qui est généralement ce qu'on veut. */
+  }
 }
 </style>
