@@ -61,7 +61,7 @@
 
 /* Limite la taille du logo */
 .logo-and-title svg {
-  max-width: 60px; /* Ajuste selon tes besoins */
+  max-width: 100px; /* Logo plus gros */
   height: auto;
   margin-right: 1rem;
 }
@@ -85,7 +85,7 @@
 .text-block p {
   font-family: var(--text-font);
   color: var(--text-color-light);
-  margin: 0.2rem 0; /* Petit espace entre les lignes */
+  margin: 0.05rem 0; /* Espace réduit entre les lignes */
 }
 
 .text-block p:first-child {

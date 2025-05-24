@@ -14,9 +14,9 @@
     "@nuxt/fonts": "0.10.3",
     "@nuxt/scripts": "0.10.5",
     "@unhead/vue": "^1.11.20",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "gsap": "^3.13.0",
-    "nuxt": "^3.17.1",
+    "nuxt": "^3.17.4",
     "vue": "latest",
     "vue-router": "latest"
   },
