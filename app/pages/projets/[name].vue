@@ -34,6 +34,7 @@
             @load="handleImageLoad"
           >
         </section>
+      </template>
     </div>
   </div>
 </template>
