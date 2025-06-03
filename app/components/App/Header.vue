@@ -110,7 +110,7 @@ onMounted(() => {
 
 /* Limite la taille du logo */
 .logo-and-title svg {
-  max-width: 60px;
+  max-width: 100px;
   height: auto;
   margin-right: 1rem;
 }
@@ -124,7 +124,6 @@ onMounted(() => {
 }
 
 .navigation {
-  width: 60%;
   position: relative;
   z-index: 20;
 }
