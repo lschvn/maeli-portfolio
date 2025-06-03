@@ -85,7 +85,7 @@
 .text-block p {
   font-family: var(--text-font);
   color: var(--text-color-light);
-  margin: 0.05rem 0; /* Espace réduit entre les lignes */
+  margin: 0; /* Espace réduit entre les lignes */
 }
 
 .text-block p:first-child {
