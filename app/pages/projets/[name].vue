@@ -35,13 +35,23 @@
           >
         </section>
       </template>
+
+      <!-- Panneau Flèche de navigation vers le projet suivant -->
+      <section v-if="nextProjet" class="panel next-arrow-panel">
+        <a :href="nextProjetUrl" class="next-project-arrow">
+          <svg width="70" height="70" viewBox="0 0 93 93" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="46.5" cy="46.5" r="46.5" fill="#D9D9D9"/>
+            <path d="M27 45.25H25.25V48.75H27V45.25ZM68.209 48.2374C68.8924 47.554 68.8924 46.446 68.209 45.7626L57.072 34.6256C56.3886 33.9422 55.2806 33.9422 54.5971 34.6256C53.9137 35.309 53.9137 36.4171 54.5971 37.1005L64.4966 47L54.5971 56.8995C53.9137 57.5829 53.9137 58.691 54.5971 59.3744C55.2806 60.0578 56.3886 60.0578 57.072 59.3744L68.209 48.2374ZM27 47V48.75H66.9715V47V45.25H27V47Z" fill="black"/>
+          </svg>
+        </a>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, onActivated, nextTick, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { PROJECTS } from '~/utils/constants';
@@ -49,12 +59,38 @@ import { PROJECTS } from '~/utils/constants';
 gsap.registerPlugin(ScrollTrigger);
 
 const route = useRoute();
+const router = useRouter();
 const routeName = computed(() => route.params.name as string);
 
 const projet = computed(() => {
   if (!routeName.value) return null;
   const allProjects = Object.values(PROJECTS).flat();
   return allProjects.find(p => p.path === routeName.value) || null;
+});
+
+const allProjectsFlat = computed(() => Object.values(PROJECTS).flat());
+
+const currentProjetIndex = computed(() => {
+  if (!projet.value) return -1;
+  return allProjectsFlat.value.findIndex(p => p.path === projet.value?.path);
+});
+
+const nextProjet = computed(() => {
+  if (currentProjetIndex.value === -1 || currentProjetIndex.value >= allProjectsFlat.value.length - 1) {
+    return null; // Pas de projet suivant ou dernier projet
+  }
+  return allProjectsFlat.value[currentProjetIndex.value + 1];
+});
+
+const nextProjetUrl = computed(() => {
+  if (nextProjet.value) {
+    const resolvedRoute = router.resolve({
+      name: 'projets-name',
+      params: { name: nextProjet.value.path },
+    });
+    return resolvedRoute.href;
+  }
+  return '#'; // Fallback href
 });
 
 const scrollWrapperEl = ref<HTMLElement | null>(null);
@@ -181,7 +217,7 @@ function initializeGSAP() {
   }, scrollWrapperEl.value); // Scope du contexte GSAP
 }
 
-function handleImageLoad(event: Event) {
+function handleImageLoad(_event: Event) {
   // Optionnel: forcer un rafraîchissement si les dimensions n'étaient pas connues
   // ScrollTrigger.refresh(); // Peut être coûteux
 }
@@ -271,7 +307,6 @@ onUnmounted(() => {
   max-width: 700px;
   padding: 3vw 5vw;
   background-color: #fff;
-  overflow-y: scroll; /* Pour le contenu long sur desktop */
 }
 
 .info-content {
@@ -402,5 +437,35 @@ onUnmounted(() => {
                            'cover' avec width:100% et height:auto va s'assurer que l'image couvre
                            la largeur et ajuste sa hauteur, ce qui est généralement ce qu'on veut. */
   }
+}
+
+/* Style pour la flèche de navigation */
+.next-arrow-panel {
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  width: 150px; /* Largeur du panneau pour la flèche */
+  padding: 20px; /* Espace autour de la flèche, agissant comme une marge réduite */
+  /* background-color: #f0f0f0; */ /* Optionnel: pour visualiser le panneau */
+}
+
+.next-project-arrow {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex; /* Aide à centrer le SVG si nécessaire */
+  align-items: center;
+  justify-content: center;
+}
+
+.next-project-arrow:hover {
+  transform: scale(1.1);
+}
+
+.next-project-arrow svg {
+  display: block; /* Évite l'espace en dessous de l'SVG inline */
 }
 </style>
