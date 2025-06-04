@@ -13,7 +13,7 @@
           <div v-for="(projet, index) in projects" :key="index">
             <a :href="`/projets/${projet.path}`" class="project-card">
 
-              <h2>{{ projet.name }}</h2>
+              <h2>{{ projet.name.toUpperCase() }}</h2>
             
               <!-- Tags -->
               <div class="tags">

@@ -89,7 +89,7 @@ export const PROJECTS = {
       "tags": ["design", "UI"],
       "path": "portfolio-louis-lschvn",
       "description": "J’ai réalisé la maquette et la direction artistique du portfolio du développeur web Louis Leschevin. Son site est disponible ici : https://louis-leschevin.com."
-      ,"img": 3
+      ,"img": 2
     },
     {
       "name": "RADTRIP",
