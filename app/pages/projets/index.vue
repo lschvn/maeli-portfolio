@@ -183,7 +183,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10rem;
-  padding: 6rem;
+  padding: 6rem 10rem; /* Increased side padding */
 }
 
 /* --- Responsive Styles --- */
@@ -191,7 +191,7 @@ main {
 /* Tablet breakpoint (e.g., <= 992px) */
 @media (max-width: 992px) {
   main {
-    padding: 4rem; /* Reduce main padding */
+    padding: 4rem 9rem; /* Increased side padding */
     gap: 8rem;
   }
 
@@ -212,7 +212,7 @@ main {
 /* Mobile breakpoint (e.g., <= 768px) */
 @media (max-width: 768px) {
   main {
-    padding: 3rem 2rem; /* Further reduce padding */
+    padding: 3rem 4rem; /* Increased side padding */
     gap: 6rem; /* Reduce gap between categories */
   }
 
@@ -262,7 +262,7 @@ main {
 /* Smaller Mobile breakpoint (e.g., <= 480px) */
 @media (max-width: 480px) {
    main {
-    padding: 2rem 1rem; /* Minimal padding */
+    padding: 2rem 2rem; /* Increased side padding */
     gap: 4rem;
   }
 

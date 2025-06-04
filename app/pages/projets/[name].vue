@@ -1,11 +1,12 @@
 <template>
-  <div ref="scrollWrapperEl" class="horizontal-scroll-wrapper">
+    <div ref="scrollWrapperEl" class="horizontal-scroll-wrapper">
     <div ref="panelsContainerEl" class="panels-container">
+      <AppHeader style="max-width: 100vw;" />
       <!-- Panneau 1: Informations du projet -->
       <section v-if="projet" class="panel info-panel">
         <div class="info-content">
           <h1>{{ projet.name }}</h1>
-          <p>{{ projet.description }}</p>
+          <p class="description">{{ projet.description }}</p>
           <ul v-if="projet.tags && projet.tags.length > 0">
             <li v-for="(tag, index) in projet.tags" :key="`tag-${index}`">
               <span class="tag">{{ tag.toUpperCase() }}</span>
@@ -280,12 +281,22 @@ onUnmounted(() => {
   position: relative; /* Nécessaire pour le pinning GSAP */
 }
 
+.description {
+  max-width: 50vw;
+}
+
+@media (max-width: 768px) {
+  .description {
+    max-width: 100%;
+  }
+}
+  
 .panels-container {
   /* Desktop: flex row pour scroll horizontal */
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row; /* Défaut pour desktop */
-  width: max-content; /* S'adapte à la largeur totale des panneaux enfants sur desktop */
+  width: 100vw; /* S'adapte à la largeur totale des panneaux enfants sur desktop */
   height: 100%; /* Prend toute la hauteur du wrapper sur desktop */
   will-change: transform; /* Optimisation pour l'animation de transformation sur desktop */
 }
@@ -295,18 +306,22 @@ onUnmounted(() => {
   height: 100%;
   flex-shrink: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   box-sizing: border-box;
   position: relative;
 }
 
 .info-panel {
-  /* Desktop: largeur spécifique */
-  width: 85vw;
-  max-width: 700px;
+  width: 100vw;
   padding: 3vw 5vw;
   background-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .info-panel {
+    padding: 20vw 5vw;
+  }
 }
 
 .info-content {
@@ -414,8 +429,7 @@ onUnmounted(() => {
     width: 100% !important; /* Prend toute la largeur */
     max-width: none; /* Annule la max-width desktop */
     height: 50vh;
-    padding: 30px 30px; /* Ajustement du padding pour mobile */
-    overflow-y: scroll; /* Le scroll se fait sur la page entière */
+    padding: 30vh 30px; /* Ajustement du padding pour mobile */
   }
   .info-content h1 {
     font-size: clamp(1.8rem, 6vw, 2.5rem); /* Taille de titre ajustée pour mobile */
