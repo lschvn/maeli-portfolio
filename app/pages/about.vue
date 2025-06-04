@@ -14,10 +14,10 @@
         <!-- Pour la simplicité, on anime le h1 en entier -->
         <h1 ref="h1Title">Hello!</h1>
         <p class="intro-paragraph-1" ref="introP1">
-            Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> et je suis étudiante en création numérique et plus particulièrement en <strong class="highlight">graphisme</strong>.
+            Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> et je suis étudiante<br>en création numérique et plus particulièrement<br>en <strong class="highlight">graphisme</strong>.
         </p>
         <p class="intro-paragraph-2" ref="introP2">
-          J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées, c'est ça que j'aime dans ce domaine. Je suis à l'écoute, organisée et consciencieuse.
+          J'ai toujours eu un attrait pour le design,<br>ce qui me pousse à être curieuse<br>en regardant les tendances dans ce domaine.<br>Pouvoir "donner vie" à des idées, c'est ça que j'aime dans ce domaine.<br>Je suis à l'écoute, organisée et consciencieuse.
         </p>
       </div>
     </header>

@@ -127,7 +127,6 @@ main {
   /* Aligné à droite sur desktop par défaut */
   align-items: flex-end;
   gap: 0.5rem; /* Espace réduit entre H1 et SVG par défaut */
-  width: 90%; /* Prend 90% de la largeur de son parent (main) */
   max-width: 1200px; /* Limite la largeur maximale */
   padding: 0 1rem; /* Ajout de padding horizontal */
   box-sizing: border-box;
@@ -137,7 +136,7 @@ main {
 h1 {
   font-family: var(--title-font);
   /* Utilise clamp pour une taille de police fluide */
-  font-size: clamp(2rem, 6.4vw, 4.8rem); /* Taille réactive */
+  font-size: clamp(2rem, 6.4vw, 6rem); /* Taille réactive */
   color: var(--text-color);
   font-weight: 800;
   text-transform: uppercase;
