@@ -92,6 +92,7 @@
       </section>
     </footer>
   </div>
+  <AppFooter />
 </template>
 
 <script setup>
@@ -310,16 +311,16 @@ onMounted(() => {
   font-size: 6rem; /* Très grand */
   font-weight: bold;
   color: var(--text-color);
-  margin: 0 0 20px 0;
+  margin: 0 0 30px 0; /* Plus d'espace après le titre */
   line-height: 1;
 }
 
 .intro-paragraph-1 {
   font-family: var(--text-font);
   color: var(--text-color);
-  font-size: 1.4rem; /* Relativement grand */
+  font-size: 1.6rem; /* Plus gros */
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin-bottom: 25px; /* Plus d'espace */
 }
 .intro-paragraph-1 strong {
   font-weight: 600; /* Ou la graisse désirée */
@@ -336,6 +337,7 @@ onMounted(() => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px; /* Espace entre les deux colonnes */
+  margin-bottom: 40px; /* Réduire l'espace avant la section footer */
 }
 /* Styles communs aux titres de section */
 .formations-section h2,

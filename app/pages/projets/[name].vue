@@ -315,7 +315,7 @@ onUnmounted(() => {
 .info-panel {
   width: 100vw;
   padding: 3vw 5vw;
-  background-color: #fff;
+  background-color: var(--background-color);
 }
 
 @media (max-width: 768px) {
@@ -349,14 +349,15 @@ onUnmounted(() => {
   gap: 0.8rem;
 }
 .tag {
-  background-color: #eee;
+  background-color: var(--text-color);
   padding: 0.5em 1em;
   border-radius: 15px;
   font-size: 0.85rem;
   font-weight: 500;
   white-space: nowrap;
-  color: #555;
+  color: var(--background-color);
   text-transform: uppercase;
+  
 }
 .scroll-hint {
   position: absolute;

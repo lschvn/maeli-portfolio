@@ -27,10 +27,10 @@
     <div class="navigation">
       <ul class="nav-list">
         <li v-for="(item, index) in ['projets', 'about', 'contact']" :key="index" class="nav-item" ref="navItems">
-          <NuxtLink :to="`/${item}`" class="nav-link">
+          <a :href="`/${item}`" class="nav-link">
             <p class="nav-number">0{{ index + 1 }}.</p>
             <p class="nav-text">{{ item.toUpperCase() }}</p>
-          </NuxtLink>
+          </a>
         </li>
       </ul>
     </div>
