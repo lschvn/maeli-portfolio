@@ -12,12 +12,17 @@
       <div class="header-right">
         <!-- Utilisation d'un span pour animer le texte mot par mot ou lettre par lettre si besoin -->
         <!-- Pour la simplicité, on anime le h1 en entier -->
-        <h1 ref="h1Title">Hello!</h1>
+        <h1 ref="h1Title">Hello !</h1>
         <p class="intro-paragraph-1" ref="introP1">
-            Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> et je suis étudiante<br>en création numérique et plus particulièrement<br>en <strong class="highlight">graphisme</strong>.
+            Je m'appelle <strong class="highlight-name">Maëli Grégori</strong> aka plumet.<br>
+            Je suis étudiante en création numérique<br>
+            et plus particulièrement en <strong class="highlight">graphisme</strong>.
         </p>
         <p class="intro-paragraph-2" ref="introP2">
-          J'ai toujours eu un attrait pour le design,<br>ce qui me pousse à être curieuse<br>en regardant les tendances dans ce domaine.<br>Pouvoir "donner vie" à des idées, c'est ça que j'aime dans ce domaine.<br>Je suis à l'écoute, organisée et consciencieuse.
+          J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse<br>
+          en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées,<br>
+          c'est ce que j'aime dans ce domaine. Je suis à l'écoute, organisée et<br>
+          consciencieuse.
         </p>
       </div>
     </header>
@@ -308,19 +313,19 @@ onMounted(() => {
 
 .header-right h1 {
   font-family: var(--title-font);
-  font-size: 6rem; /* Très grand */
+  font-size: 7.5rem; /* Encore plus grand */
   font-weight: bold;
   color: var(--text-color);
-  margin: 0 0 30px 0; /* Plus d'espace après le titre */
+  margin: 0 0 40px 0; /* Plus d'espace après le titre */
   line-height: 1;
 }
 
 .intro-paragraph-1 {
   font-family: var(--text-font);
   color: var(--text-color);
-  font-size: 1.6rem; /* Plus gros */
-  line-height: 1.6;
-  margin-bottom: 25px; /* Plus d'espace */
+  font-size: 2rem; /* Beaucoup plus gros */
+  line-height: 1.7;
+  margin-bottom: 35px; /* Plus d'espace */
 }
 .intro-paragraph-1 strong {
   font-weight: 600; /* Ou la graisse désirée */
@@ -328,8 +333,9 @@ onMounted(() => {
 
 .intro-paragraph-2 {
   font-family: var(--text-font);
-  font-size: 1rem; /* Plus petit */
-  line-height: 1.6;
+  font-size: 1.3rem; /* Plus gros aussi */
+  line-height: 1.7;
+  margin-bottom: 20px; /* Ajouter de l'espace en bas */
 }
 
 /* Main Content Section (Formations & Expériences) */
