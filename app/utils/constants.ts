@@ -12,7 +12,7 @@ export const PROJECTS = {
       "tags": ["print", "branding"],
       "path": "chriz",
       "description": "Dans le cadre d’un projet fictif, je devais imaginer <br>une marque de <strong>bière originaire de Cherbourg</strong>. <br>J’ai alors créé CHIRZ, une marque à l’esthétique <strong>maritime</strong>, <br>en hommage à la ville bord de mer. Son nom est aussi <br>un clin d’œil à la manière de trinquer en anglais, \"cheers\"."
-      ,"img": 2
+      ,"img": 3
     },
     {
       "name": "FRUIZZZ",
@@ -34,7 +34,7 @@ export const PROJECTS = {
       "path": "horscape",
       "description": "J’ai travaillé pour <strong>Horsplace</strong>, une entreprise innovante dans la gestion <br>des infrastructures équestres. Elle proposait d’abord des tablettes robustes <br>pour les écuries, puis a élargi son offre avec une plateforme de <strong>réservation de box</strong> <br>pour chevaux. J’ai réalisé la maquette du site ainsi que tout le <strong>rebranding</strong><br>, en renommant la plateforme  \"Horscape\", à partir du préfixe souhaité par le client : \"Hors\"."
     
-    ,"img": 5},
+    ,"img": 3},
     {
       "name": "MAYA",
       "tags": ["3D", "digital"],

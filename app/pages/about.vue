@@ -231,7 +231,7 @@ onMounted(() => {
   background-color: var(--background-color);
   font-family: var(--text-font);
   color: var(--text-color);
-  padding: 60px 60px 60px 120px; /* Marge gauche augmentée */
+  padding: 140px 60px 60px 120px; /* Marge gauche augmentée */
   min-height: 100vh;
   display: flex;
   flex-direction: column;

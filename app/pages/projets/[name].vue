@@ -280,16 +280,6 @@ onUnmounted(() => {
   height: 100vh; /* Cache le débordement horizontal natif sur desktop */
   position: relative; /* Nécessaire pour le pinning GSAP */
 }
-
-.description {
-  max-width: 50vw;
-}
-
-@media (max-width: 768px) {
-  .description {
-    max-width: 100%;
-  }
-}
   
 .panels-container {
   /* Desktop: flex row pour scroll horizontal */
