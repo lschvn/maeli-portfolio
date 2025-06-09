@@ -186,7 +186,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10rem;
-  padding: 6rem 10rem; /* Increased side padding */
+  padding: 12rem 10rem 6rem; /* Increased side padding */
 }
 
 /* --- Responsive Styles --- */

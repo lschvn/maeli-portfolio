@@ -1,13 +1,6 @@
 export const PROJECTS = {
   "marques": [
     {
-      "name": "AIKEED",
-      "tags": ["branding", "digital"],
-      "path": "aikeed",
-      "description": "Dans le cadre d’un projet fictif sur l’innovation <br>dans l’éducation, j’ai imaginé AiKeed, une <strong>intelligence artificielle</strong><br> conçue pour accompagner les élèves en leur proposant <br>des devoirs personnalisés adaptés à leurs besoins."
-      ,"img": 3
-    },
-    {
       "name": "CHRIZ",
       "tags": ["print", "branding"],
       "path": "chriz",
@@ -20,13 +13,6 @@ export const PROJECTS = {
       "path": "fruizzz",
       "description": "Dans le cadre d'un projet fictif, notre objectif était de créer <br>une marque de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, <br>avec le citron comme élément principal, et des couleurs jaunes <br>et vertes pour évoquer <strong>l’énergie et la fraîcheur</strong>."
       ,"img": 3
-    },
-    {
-      "name": "PETRIN",
-      "tags": ["branding", "packaging"],
-      "path": "petrin",
-      "description": "Lors d'un workshop typographie, j’ai dû créer une typographie <br>sans utiliser d’outils numériques. J’ai imaginé Pétrin, une typographie<br> inspirée pour une école de boulangerie. Pour la réaliser, j'ai utilisé <br>des <strong>miettes de croissants</strong>, créant ainsi une police unique."
-      ,"img": 2
     },
     {
       "name": "HORSCAPE",
@@ -45,19 +31,27 @@ export const PROJECTS = {
   ],
   "creations": [
     {
-      "name": "Le fort de l’île pelée",
-      "tags": ["DA", "MISE EN PAGE"],
-      "path": "le-fort-de-l-ile-pelee",
-      "description": "J’ai assuré la direction artistique de A à Z d’un ouvrage dédié à la découverte du fort de l’Île Pelée <br>pour le Port de Normandie. De la conception graphique à la mise en page finale, j’ai travaillé à créer <br>un visuel immersif de l’histoire du lieu tout en apportant une touche contemporaine.",
-      "img": 2
-    },
-    {
       "name": "BEAUREGARD",
       "tags": ["design", "branding"],
       "path": "beauregard",
       "description": "Ma mission était d'imaginer l'identité visuelle que le festival <strong>Beauregard</strong> <br>aurait pu adopter pour l’édition 2024-2025. J’ai ensuite réalisé différentes déclinaisons <br>de cette direction artistique."
       ,"img": 2
     },
+    {
+      "name": "CYBER-RACING",
+      "tags": ["digital", "gaming"],
+      "path": "cyber-racing",
+      "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
+      ,"img": 3
+    },
+    {
+      "name": "Le fort de l’île pelée",
+      "tags": ["DA", "MISE EN PAGE"],
+      "path": "le-fort-de-l-ile-pelee",
+      "description": "J’ai assuré la direction artistique de A à Z d’un ouvrage dédié à la découverte du fort de l’Île Pelée <br>pour le Port de Normandie. De la conception graphique à la mise en page finale, j’ai travaillé à créer <br>un visuel immersif de l’histoire du lieu tout en apportant une touche contemporaine.",
+      "img": 2
+    },
+    
     // {
     //   "name": "COPIE NON CONFORME",
     //   "tags": ["print", "copywriting"],
@@ -70,13 +64,7 @@ export const PROJECTS = {
     //   "tags": ["art", "handmade"],
     //   "path": "arts-and-crafts"
     // },
-    {
-      "name": "CYBER-RACING",
-      "tags": ["digital", "gaming"],
-      "path": "cyber-racing",
-      "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
-      ,"img": 3
-    },
+    
     // {
     //   "name": "REMAKES",
     //   "tags": ["concept", "remix"],
