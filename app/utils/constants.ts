@@ -32,7 +32,7 @@ export const PROJECTS = {
       "name": "HORSCAPE",
       "tags": ["3D", "digital"],
       "path": "horscape",
-      "description": "J’ai travaillé pour <strong>Horsplace</strong>, une entreprise innovante dans la gestion <br>des infrastructures équestres. Elle proposait d’abord des tablettes robustes <br>pour les écuries, puis a élargi son offre avec une plateforme de <strong>réservation de box</strong> <br>pour chevaux. J’ai réalisé la maquette du site ainsi que tout le <strong>rebranding</strong><br>, en renommant la plateforme  \"Horscape\", à partir du préfixe souhaité par le client : \"Hors\"."
+      "description": "J’ai travaillé pour <strong>Horsplace</strong>, une entreprise innovante dans la gestion <br>des infrastructures équestres. Elle proposait d’abord des tablettes robustes <br>pour les écuries, puis a élargi son offre avec une plateforme de <strong>réservation de box</strong> <br>pour chevaux. J’ai réalisé la maquette du site ainsi que tout le <strong>rebranding</strong>, <br>en renommant la plateforme  \"Horscape\", à partir du préfixe souhaité par le client : \"Hors\"."
     
     ,"img": 3},
     {

@@ -6,7 +6,7 @@
       <section v-if="projet" class="panel info-panel">
         <div class="info-content">
           <h1>{{ projet.name }}</h1>
-          <p class="description" v-html="'○ ' + projet.description"></p>
+          <p class="description" v-html="projet.description"></p>
           <ul v-if="projet.tags && projet.tags.length > 0">
             <li v-for="(tag, index) in projet.tags" :key="`tag-${index}`">
               <span class="tag">{{ tag.toUpperCase() }}</span>
@@ -289,6 +289,11 @@ onUnmounted(() => {
   width: 100vw; /* S'adapte à la largeur totale des panneaux enfants sur desktop */
   height: 100%; /* Prend toute la hauteur du wrapper sur desktop */
   will-change: transform; /* Optimisation pour l'animation de transformation sur desktop */
+}
+
+.description {
+  border-left: 3px solid var(--text-color);
+  padding-left: 1.5rem;
 }
 
 .panel {
