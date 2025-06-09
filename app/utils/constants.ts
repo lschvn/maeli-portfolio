@@ -42,7 +42,7 @@ export const PROJECTS = {
       "tags": ["jeux de plateau", "éducatif"],
       "path": "cyber-racing",
       "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
-      ,"img": 3
+      ,"img": 1
     },
     {
       "name": "Le fort de l’île pelée",
@@ -77,7 +77,7 @@ export const PROJECTS = {
       "tags": ["da", "site"],
       "path": "portfolio-louis-lschvn",
       "description": "J’ai réalisé la maquette et la <strong>direction artistique</strong> du portfolio <br>du <strong>développeur web</strong> Louis Leschevin. Son site est disponible ici : <br>https://louis-leschevin.com."
-      ,"img": 2
+      ,"img": 3
     },
     {
       "name": "RADTRIP",
