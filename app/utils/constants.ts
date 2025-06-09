@@ -5,7 +5,7 @@ export const PROJECTS = {
       "tags": ["bière locale"],
       "path": "chriz",
       "description": "Dans le cadre d’un projet fictif, je devais imaginer <br>une marque de <strong>bière originaire de Cherbourg</strong>. <br>J’ai alors créé CHIRZ, une marque à l’esthétique <strong>maritime</strong>, <br>en hommage à la ville bord de mer. Son nom est aussi <br>un clin d’œil à la manière de trinquer en anglais, \"cheers\"."
-      ,"img": 2
+      ,"img": 3
     },
     {
       "name": "FRUIZZZ",
