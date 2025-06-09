@@ -42,7 +42,7 @@ export const PROJECTS = {
       "tags": ["jeux de plateau", "éducatif"],
       "path": "cyber-racing",
       "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
-      ,"img": 1
+      ,"img": 3
     },
     {
       "name": "Le fort de l’île pelée",
@@ -90,7 +90,7 @@ export const PROJECTS = {
       "name": "ASSO VOVINAM CAEN",
       "tags": ["art martial", "site"],
       "path": "asso-vovinam-caen",
-      "description": "J’ai réalisé la maquette fictive du site web d’une association de <br>Vovinam à Caen, qui n’en possédait pas encore. Je leur ai donc proposé <br>une version en accord avec leur ton et leur direction artistique, en <br>respectant l’univers des arts martiaux."
+      "description": "J’ai réalisé la maquette fictive du site web d’une association de Vovinam<br> à Caen, qui n’en possédait pas encore. Je leur ai donc proposé une version<br> en accord avec leur ton et leur direction artistique, en respectant l’univers<br> des arts martiaux."
       ,"img": 2
     }
   ]
