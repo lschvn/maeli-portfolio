@@ -61,7 +61,9 @@
       </div>
     </section>
   </main>
-  </div>
+</div>
+<div style="height: 100vh;"></div>
+<AppFooter />
 </template>
 
 <script setup lang="ts">
