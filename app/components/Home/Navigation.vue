@@ -10,29 +10,29 @@
           class="nav-item" 
           @mouseenter="handleMouseEnter('PROJETS')" 
         >
-          <NuxtLink to="/projets">
+          <a href="/projets">
             <p>01.</p> <p>
               PROJETS
             </p>
-          </NuxtLink>
+          </a>
         </li>
         <li 
           class="nav-item" 
           @mouseenter="handleMouseEnter('A PROPOS')" 
         >
-          <NuxtLink to="/about">
+          <a href="/about">
             <p>02.</p> <p>
               A PROPOS
             </p>
-          </NuxtLink>
+          </a>
         </li>
         <li 
           class="nav-item" 
           @mouseenter="handleMouseEnter('CONTACT')" 
         >
-          <NuxtLink to="/contact">
+          <a href="/contact">
             <p>03.</p> <p>CONTACT</p>
-          </NuxtLink>
+          </a>
         </li>
       </ul>
     </nav>
