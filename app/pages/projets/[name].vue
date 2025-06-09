@@ -5,7 +5,7 @@
       <!-- Panneau 1: Informations du projet -->
       <section v-if="projet" class="panel info-panel">
         <div class="info-content">
-          <h1>{{ projet.name }}</h1>
+          <h1 v-html="projet.name"/>
           <p class="description" v-html="projet.description"></p>
           <ul v-if="projet.tags && projet.tags.length > 0">
             <li v-for="(tag, index) in projet.tags" :key="`tag-${index}`">

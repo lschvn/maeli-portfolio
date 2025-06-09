@@ -4,15 +4,19 @@ export const PROJECTS = {
       "name": "CHRIZ",
       "tags": ["bière locale"],
       "path": "chriz",
-      "description": "Dans le cadre d’un projet fictif, je devais imaginer <br>une marque de <strong>bière originaire de Cherbourg</strong>. <br>J’ai alors créé CHIRZ, une marque à l’esthétique <strong>maritime</strong>, <br>en hommage à la ville bord de mer. Son nom est aussi <br>un clin d’œil à la manière de trinquer en anglais, \"cheers\"."
-      ,"img": 2
+      "description": `Dans le cadre d’un projet fictif, je devais imaginer une marque <br>
+de bière <strong>originaire de Cherbourg</strong>. J’ai alors créé CHIRZ, une marque<br>
+ à l’esthétique <strong>maritime</strong>, en hommage à la ville bord de mer. <br>
+Son nom est aussi un clin d’œil à la manière de trinquer en anglais, "cheers".<br>`,"img": 2
     },
     {
       "name": "FRUIZZZ",
-      "tags": ["boisson énergisante", "concept"],
+      "tags": ["boisson énergisante"],
       "path": "fruizzz",
-      "description": "Dans le cadre d'un projet fictif, notre objectif était de créer <br>une marque de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, <br>avec le citron comme élément principal, et des couleurs jaunes <br>et vertes pour évoquer <strong>l’énergie et la fraîcheur</strong>."
-      ,"img": 2
+      "description": `
+        Dans le cadre d'un projet fictif, notre objectif était de créer une marque <br>
+de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, avec le citron comme <br>élément principal, et des couleurs jaunes et vertes pour évoquer <b>l’énergie</b> <br>et la <b>fraîcheur</b>.
+      `,"img": 2
     },
     {
       "name": "HORSCAPE",
@@ -25,7 +29,7 @@ export const PROJECTS = {
       "name": "MAYA",
       "tags": ["da", "crème solaire"],
       "path": "maya",
-      "description": "Dans le cadre d’un workshop, nous avons travaillé à partir du nom <br>de marque imposé « Maya ». À partir de cela, chacun devait imaginer <br>un produit ou un service. J’ai choisi de développer une marque de crème <br>solaire bio, naturelle, non polluante pour l’océan, avec la noix de coco <br>comme ingrédient principal."
+      "description": "Dans le cadre d’un <b>workshop</b>, nous avons travaillé à partir du nom <br>de marque imposé « Maya ». À partir de cela, chacun devait imaginer <br>un produit ou un service. J’ai choisi de développer une <b>marque de crème <br>solaire bio</b>, naturelle, non polluante pour l’océan, avec <b>la noix de coco</b> <br>comme ingrédient principal."
       ,"img": 1
     }
   ],
@@ -34,7 +38,7 @@ export const PROJECTS = {
       "name": "BEAUREGARD",
       "tags": ["déclinaisons", "festival beauregard"],
       "path": "beauregard",
-      "description": "Ma mission était d'imaginer l'identité visuelle que le festival <strong>Beauregard</strong> <br>aurait pu adopter pour l’édition 2024-2025. J’ai ensuite réalisé différentes déclinaisons <br>de cette direction artistique."
+      "description": "Ma mission était d'imaginer l'identité visuelle que le festival <strong>Beauregard</strong> <br>aurait pu adopter pour l’édition 2024-2025.Je me suis inspirée du style Bauhaus, <br>en jouant avec des formes <b>géométriques</b> et en associant des couleurs dynamiques <br>et <b>fraîches</b>. J’ai ensuite décliné cette direction artistique à travers plusieurs variations.<br>"
       ,"img": 2
     },
     {
@@ -42,13 +46,13 @@ export const PROJECTS = {
       "tags": ["jeux de plateau", "éducatif"],
       "path": "cyber-racing",
       "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
-      ,"img": 3
+      ,"img": 2,
     },
     {
       "name": "Le fort de l’île pelée",
       "tags": ["DA", "MISE EN PAGE"],
       "path": "le-fort-de-l-ile-pelee",
-      "description": "J’ai assuré la direction artistique de A à Z d’un ouvrage dédié à la découverte du fort de l’Île Pelée <br>pour le Port de Normandie. De la conception graphique à la mise en page finale, j’ai travaillé à créer <br>un visuel immersif de l’histoire du lieu tout en apportant une touche contemporaine.",
+      "description": "J’ai assuré la direction artistique de A à Z d’un <strong>ouvrage</strong> dédié à la découverte <br>du fort de l’Île Pelée pour le <strong>Port de Normandie</strong>. De la conception graphique à la mise <br>en page finale, j’ai travaillé à créer un visuel immersif de l’histoire du lieu tout en apportant <br>une touche <strong>contemporaine</strong>.",
       "img": 2
     },
     
@@ -76,14 +80,13 @@ export const PROJECTS = {
       "name": "PORTFOLIO LOUIS LSCHVN",
       "tags": ["da", "site"],
       "path": "portfolio-louis-lschvn",
-      "description": "J’ai réalisé la maquette et la <strong>direction artistique</strong> du portfolio <br>du <strong>développeur web</strong> Louis Leschevin. Son site est disponible ici : <br>https://louis-leschevin.com."
-      ,"img": 3
+      "description": "J’ai conçu la maquette ainsi que la <strong>direction artistique</strong> du portfolio du développeur <br>web Louis Leschevin. Il souhaitait un design à la fois <strong>simple</strong> et <strong>percutant</strong>. <br>J’ai donc opté pour une <br>couleur vive<br> comme élément central de l’identité visuelle. <br>Le site est visible ici : https://louis-leschevin.com.","img": 3
     },
     {
       "name": "RADTRIP",
       "tags": ["radio aléatoire", "application"],
       "path": "radtrip",
-      "description": "J’ai travaillé sur la conception d’une application de <strong>radio</strong><br> dont le principe repose sur une écoute entièrement <strong>aléatoire</strong><br>. L’objectif était de permettre aux utilisateurs de découvrir <br>des musiques du monde de manière spontanée et immersive."
+      "description": "J’ai travaillé sur la conception d’une application de <strong>radio</strong> dont le principe <br>repose sur une écoute entièrement <strong>aléatoire</strong>. L’objectif était de permettre <br>aux utilisateurs de découvrir des musiques du monde de manière spontanée <br>et immersive."
       ,"img": 3
     },
     {
