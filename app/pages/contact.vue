@@ -63,7 +63,7 @@
   </main>
 </div>
 <div style="height: 100vh;"></div>
-<AppFooter />
+<AppFooter style="position: fixed; width: 100vw; bottom: 0;" />
 </template>
 
 <script setup lang="ts">
