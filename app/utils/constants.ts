@@ -80,7 +80,7 @@ de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, avec le
       "name": "PORTFOLIO LOUIS LSCHVN",
       "tags": ["da", "site"],
       "path": "portfolio-louis-lschvn",
-      "description": "J’ai conçu la maquette ainsi que la <strong>direction artistique</strong> du portfolio du développeur <br>web Louis Leschevin. Il souhaitait un design à la fois <strong>simple</strong> et <strong>percutant</strong>. <br>J’ai donc opté pour une <br>couleur vive<br> comme élément central de l’identité visuelle. <br>Le site est visible ici : https://louis-leschevin.com.","img": 3
+      "description": "J’ai conçu la maquette ainsi que la <strong>direction artistique</strong> du portfolio du développeur <br>web Louis Leschevin. Il souhaitait un design à la fois <strong>simple</strong> et <strong>percutant</strong>. <br>J’ai donc opté pour une couleur vive comme élément central de l’identité visuelle. <br>Le site est visible ici : https://louis-leschevin.com.","img": 3
     },
     {
       "name": "RADTRIP",
