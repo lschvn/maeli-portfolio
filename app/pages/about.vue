@@ -333,7 +333,7 @@ onMounted(() => {
 
 .intro-paragraph-2 {
   font-family: var(--text-font);
-  font-size: 1.3rem; /* Plus gros aussi */
+  font-size: 1rem; /* Plus gros aussi */
   line-height: 1.7;
   margin-bottom: 20px; /* Ajouter de l'espace en bas */
 }
