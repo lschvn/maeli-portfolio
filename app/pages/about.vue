@@ -313,7 +313,7 @@ onMounted(() => {
 
 .header-right h1 {
   font-family: var(--title-font);
-  font-size: 7.5rem; /* Encore plus grand */
+  font-size: 5.625rem; /* Encore plus grand */
   font-weight: bold;
   color: var(--text-color);
   margin: 0 0 40px 0; /* Plus d'espace après le titre */
@@ -352,7 +352,7 @@ onMounted(() => {
 .tools-section h2 {
   font-family: var(--title-font);
   color: var(--text-color);
-  font-size: 1.8rem;
+  font-size: 1.35rem;
   margin-bottom: 30px;
   position: relative;
   display: inline-block;
