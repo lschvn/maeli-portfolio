@@ -20,7 +20,7 @@
 </svg>
     </div>  
     <div class="text-block">
-      <p>Je créer des trucs parfois</p>
+      <p>Je crée des trucs parfois</p>
       <p>avec amour</p>
     </div>
   </header>

@@ -1,10 +1,10 @@
 export const PROJECTS = {
   "marques": [
     {
-      "name": "CHRIZ",
-      "fullName": "CHRIZ",
+      "name": "CHIRZ",
+      "fullName": "CHIRZ",
       "tags": ["bière locale"],
-      "path": "chriz",
+      "path": "chirz",
       "description": `Dans le cadre d’un projet fictif, je devais imaginer une marque <br>
 de bière <strong>originaire de Cherbourg</strong>. J’ai alors créé CHIRZ, une marque<br>
  à l’esthétique <strong>maritime</strong>, en hommage à la ville bord de mer. <br>
@@ -52,7 +52,7 @@ de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, avec le
       "tags": ["jeux de plateau", "éducatif"],
       "path": "cyber-racing",
       "description": "Dans le cadre d’un partiel, j’ai conçu un <strong>jeu éducatif</strong> en anglais en choisissant <br>parmi plusieurs thèmes imposés. J’ai opté pour la <strong>cybersécurité</strong> et développé <br>une direction artistique complète afin de le rendre à la fois ludique et accessible."
-      ,"img": 2,
+      ,"img": 1,
     },
     {
       "name": "Le fort de l’île pelée",
