@@ -48,7 +48,7 @@
   /* Un peu de padding autour du contenu */
   padding: 1rem 2rem;
 
-  /* S’assure qu’il soit au-dessus du contenu */
+  /* S'assure qu'il soit au-dessus du contenu */
   z-index: 999;
 }
 
@@ -77,7 +77,7 @@
 /* Bloc de texte à droite */
 .text-block {
   display: flex;
-  flex-direction: column; /* Pour avoir tes deux phrases l’une sous l’autre */
+  flex-direction: column; /* Pour avoir tes deux phrases l'une sous l'autre */
   align-items: flex-end;  /* Aligné à droite */
 }
 
@@ -90,5 +90,19 @@
 
 .text-block p:first-child {
   color: var(--text-color); /* Couleur du premier paragraphe */
+}
+
+@media (max-width: 768px) {
+  .home-header {
+    padding: 1rem;
+  }
+
+  .logo-and-title svg {
+    max-width: 80px;
+  }
+
+  .text-block p {
+    font-size: 0.8rem;
+  }
 }
 </style>

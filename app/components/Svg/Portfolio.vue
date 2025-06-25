@@ -134,80 +134,76 @@ onMounted(() => {
   // Utilisation de gsap.matchMedia pour adapter la translation de la tête selon la taille d'écran
   const mm = gsap.matchMedia();
   mm.add({
-    // Plusieurs breakpoints pour améliorer le responsive
-    smallMobile: "(max-width: 480px)",
-    mobile: "(min-width: 481px) and (max-width: 767px)",
-    tablet: "(min-width: 768px) and (max-width: 1023px)",
-    desktop: "(min-width: 1024px) and (max-width: 1439px)",
-    largeDesktop: "(min-width: 1440px)"
+    // Définir les breakpoints pour mobile et desktop
+    isMobile: "(max-width: 767px)",
+    isDesktop: "(min-width: 768px)"
   }, (context) => {
-    const { smallMobile, mobile, tablet, desktop, largeDesktop } = context.conditions;
-    
-    if (smallMobile) {
-      tl.to(headEyeOpen, {
-        scale: 0.35,
-        duration: 0.6,
-        x: "-25vw",
-        y: "-25vh",
-        rotate: -4,
-        transformOrigin: "center center",
-        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+    const { isMobile, isDesktop } = context.conditions || {};
+
+    if (isMobile) {
+      // Sur mobile, la tête disparaît après une courte animation.
+      tl.to(container, {
+        delay: 0.5, // Un court délai pour voir la tête
+        duration: 0.8,
+        opacity: 0,
+        scale: 0.9,
+        ease: 'power2.in',
+        onComplete: () => {
+          // Masquer complètement le conteneur après l'animation
+          gsap.set(container, { display: 'none' });
+        }
       });
+
+      // Afficher le portfolio sur mobile après la disparition de la tête
+      tl.to(portfolio, { opacity: 1, duration: 0.6 })
+        .to('.design-portfolio', { opacity: 1, duration: 0.3 })
+        .to(stars, {
+          duration: 0.3,
+          opacity: 1,
+          stagger: 0.3,
+        });
     }
-    else if (mobile) {
-      tl.to(headEyeOpen, {
-        scale: 0.4,
-        duration: 0.6,
-        x: "-30vw",
-        y: "-28vh",
-        rotate: -4,
-        transformOrigin: "center center",
-        onComplete: () => { headEyeOpen.classList.add('hoverable') }
+
+    if (isDesktop) {
+      // Logique de bureau existante (déplacement de la tête)
+      const desktopContext = gsap.matchMedia();
+      desktopContext.add({
+        tablet: "(min-width: 768px) and (max-width: 1023px)",
+        desktop: "(min-width: 1024px) and (max-width: 1439px)",
+        largeDesktop: "(min-width: 1440px)"
+      }, (ctx) => {
+        const { tablet, desktop, largeDesktop } = ctx.conditions || {};
+        let xTarget = "-42vw", yTarget = "-36vh", scaleTarget = 0.45;
+
+        if (tablet) {
+          xTarget = "-38vw"; yTarget = "-34vh"; scaleTarget = 0.42;
+        } else if (desktop) {
+          xTarget = "-42vw"; yTarget = "-36vh"; scaleTarget = 0.45;
+        } else if (largeDesktop) {
+          xTarget = "-537"; yTarget = "-396"; scaleTarget = 0.45;
+        }
+
+        tl.to(headEyeOpen, {
+          scale: scaleTarget,
+          duration: 0.6,
+          x: xTarget,
+          y: yTarget,
+          rotate: -4,
+          transformOrigin: "center center",
+          onComplete: () => { headEyeOpen.classList.add('hoverable') }
+        });
       });
-    }
-    else if (tablet) {
-      tl.to(headEyeOpen, {
-        scale: 0.42,
-        duration: 0.6,
-        x: "-38vw",
-        y: "-34vh",
-        rotate: -4,
-        transformOrigin: "center center",
-        onComplete: () => { headEyeOpen.classList.add('hoverable') }
-      });
-    }
-    else if (desktop) {
-      tl.to(headEyeOpen, {
-        scale: 0.45,
-        duration: 0.6,
-        x: "-42vw",
-        y: "-36vh",
-        rotate: -4,
-        transformOrigin: "center center",
-        onComplete: () => { headEyeOpen.classList.add('hoverable') }
-      });
-    }
-    else if (largeDesktop) {
-      tl.to(headEyeOpen, {
-        scale: 0.45,
-        duration: 0.6,
-        x: -537,
-        y: -396,
-        rotate: -4,
-        transformOrigin: "center center",
-        onComplete: () => { headEyeOpen.classList.add('hoverable') }
-      });
+
+      // Afficher le reste du portfolio uniquement sur desktop
+      tl.to(portfolio, { opacity: 1, duration: 0.6 })
+        .to('.design-portfolio', { opacity: 1, duration: 0.3 })
+        .to(stars, {
+          duration: 0.3,
+          opacity: 1,
+          stagger: 0.3,
+        });
     }
   });
-
-  tl.to(portfolio, { opacity: 1, duration: 0.6 })
-    .to('.design-portfolio', { opacity: 1, duration: 0.3 })
-  
-  tl.to(stars, {
-    duration: 0.3,
-    opacity: 1,
-    stagger: 0.3,
-  })
 
   gsap.timeline({ repeat: Infinity }).to('.circle-last-letter', {
     transformOrigin: 'center center',
@@ -227,7 +223,7 @@ onMounted(() => {
     goofyAnimation.reverse();
   });
   
-  // Ajout d'un gestionnaire pour le redimensionnement de la fenêtre
+  // Le redimensionnement est déjà géré par matchMedia, mais on garde pour la robustesse.
   window.addEventListener('resize', () => {
     // Forcer une mise à jour de GSAP sur resize pour maintenir le bon positionnement
     gsap.set(headEyeOpen, {});
