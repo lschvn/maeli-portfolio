@@ -62,7 +62,7 @@ div {
 div h1 {
   position: absolute;
   font-family: var(--title-font);
-  font-size: 1.1em;
+  font-size: 1.5em;
   z-index: 15;
 }
 
