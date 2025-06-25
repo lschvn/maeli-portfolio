@@ -62,7 +62,7 @@ div {
 div h1 {
   position: absolute;
   font-family: var(--title-font);
-  transform: translateY(12.5px);
+  font-size: 1.1em;
   z-index: 15;
 }
 
@@ -83,8 +83,7 @@ div h1 {
   }
 
   div h1 {
-    font-size: 0.9em; /* Slightly smaller text */
-    transform: translateY(10px); /* Adjust vertical position */
+    font-size: 1em; /* Slightly smaller text */
   }
 }
 
@@ -103,8 +102,7 @@ div h1 {
   }
 
   div h1 {
-    font-size: 0.8em; /* Smaller text */
-    transform: translateY(8px);
+    font-size: 0.9em; /* Smaller text */
   }
 }
 
@@ -121,8 +119,7 @@ div h1 {
   }
 
   div h1 {
-    font-size: 0.75em; /* Smallest text */
-    transform: translateY(6px);
+    font-size: 0.8em; /* Smallest text */
   }
 }
 </style>

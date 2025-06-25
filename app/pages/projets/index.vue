@@ -104,7 +104,7 @@ onMounted(() => {
 .section section > div {
   position: relative;
   border-bottom: 1px solid var(--text-color);
-  padding: 1.5rem 2.5rem 1.5rem 0;
+  padding: clamp(1rem, 2vh, 1.5rem) clamp(2rem, 5vw, 2.5rem) clamp(1rem, 2vh, 1.5rem) 0;
   margin-bottom: 0;
   width: 100%;
   transition:
@@ -131,7 +131,7 @@ onMounted(() => {
 /* Titre du projet - Police plus épaisse comme dans l'image */
 .section section > div h2 {
   font-family: var(--title-font);
-  font-size: 1.8rem; /* Légèrement plus grand */
+  font-size: clamp(1.4rem, 1.2rem + 1vw, 1.8rem); /* Fluid font size */
   font-weight: 700; /* Plus épais */
   color: var(--text-color);
   margin: 0 0 0.75rem; /* Marge basse augmentée */
@@ -147,11 +147,11 @@ onMounted(() => {
 /* Style individuel de chaque tag - Bordure arrondie comme dans l'image */
 .section section .tag {
   font-family: var(--text-font);
-  font-size: 0.75rem;
+  font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem); /* Fluid font size */
   color: var(--text-color); /* Couleur du texte */
   border: 1px solid var(--text-color); /* Bordure plus visible */
   border-radius: 7px; /* Plus arrondi */
-  padding: 3px 10px; /* Padding ajusté */
+  padding: clamp(2px, 0.1rem + 0.25vw, 3px) clamp(6px, 0.2rem + 1vw, 10px); /* Fluid padding */
   background-color: transparent; /* Pas de fond spécifique */
 }
 
@@ -168,7 +168,7 @@ onMounted(() => {
 
 .arrow {
   position: absolute;
-  right: 0;
+  right: clamp(0.5rem, 2vw, 2rem); /* Fluid position */
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-color);
@@ -176,8 +176,8 @@ onMounted(() => {
 }
 
 .arrow svg {
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2rem, 1.5rem + 2vw, 3rem); /* Fluid width */
+  height: clamp(2rem, 1.5rem + 2vw, 3rem); /* Fluid height */
   color: var(--text-color);
   transform: rotate(45deg);
 }
@@ -185,40 +185,24 @@ onMounted(() => {
 main {
   display: flex;
   flex-direction: column;
-  gap: 10rem;
-  padding: 12rem 10rem 6rem; /* Increased side padding */
+  gap: clamp(4rem, 2rem + 8vh, 10rem); /* Fluid gap */
+  padding-top: clamp(4rem, 5rem + 10vh, 12rem);
+  padding-bottom: 6rem;
+  padding-left: clamp(2rem, 1rem + 5vw, 10rem);
+  padding-right: clamp(2rem, 1rem + 5vw, 10rem);
 }
 
 /* --- Responsive Styles --- */
 
 /* Tablet breakpoint (e.g., <= 992px) */
 @media (max-width: 992px) {
-  main {
-    padding: 4rem 9rem; /* Increased side padding */
-    gap: 8rem;
-  }
-
   .section {
     gap: 4rem; /* Reduce gap between folder and projects */
-  }
-
-  .section section > div h2 {
-    font-size: 1.6rem; /* Slightly smaller title */
-  }
-
-  .arrow svg {
-    width: 2.5rem; /* Slightly smaller arrow */
-    height: 2.5rem;
   }
 }
 
 /* Mobile breakpoint (e.g., <= 768px) */
 @media (max-width: 768px) {
-  main {
-    padding: 3rem 4rem; /* Increased side padding */
-    gap: 6rem; /* Reduce gap between categories */
-  }
-
   .section {
     flex-direction: column; /* Stack folder and projects vertically */
     gap: 2rem; /* Adjust gap for vertical layout */
@@ -238,49 +222,11 @@ main {
   .project-section {
      width: 100%; /* Ensure project section takes full width */
   }
-
-  .section section > div {
-    padding: 1rem 2rem 1rem 0; /* Adjust padding for smaller screens */
-  }
-
-  .section section > div h2 {
-    font-size: 1.4rem; /* Smaller title for mobile */
-  }
-
-   .section section .tag {
-    font-size: 0.7rem; /* Slightly smaller tags */
-    padding: 2px 8px;
-  }
-
-  .arrow svg {
-    width: 2rem; /* Smaller arrow for mobile */
-    height: 2rem;
-  }
-
-  .arrow {
-     right: 0.5rem; /* Adjust arrow position */
-  }
 }
 
 /* Smaller Mobile breakpoint (e.g., <= 480px) */
 @media (max-width: 480px) {
-   main {
-    padding: 2rem 2rem; /* Increased side padding */
-    gap: 4rem;
-  }
-
-  .section section > div h2 {
-    font-size: 1.3rem; /* Even smaller title */
-  }
-
-   .section section .tag {
-    font-size: 0.65rem; /* Even smaller tags */
-    padding: 2px 6px;
-   }
-
-   .arrow svg {
-    width: 1.8rem; /* Even smaller arrow */
-    height: 1.8rem;
-   }
+   /* All major properties are now fluid, so less specific overrides are needed. */
+   /* We could add more specific overrides here if necessary for very small devices. */
 }
 </style>
