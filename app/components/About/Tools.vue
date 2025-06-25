@@ -90,5 +90,9 @@ div {
   div {
     flex-wrap: wrap;
   }
+
+  svg {
+    transform: scale(0.7);
+  }
 }
 </style>
