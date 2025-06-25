@@ -61,9 +61,8 @@
       </div>
     </section>
   </main>
+  <AppFooter style="position: fixed; width: 100vw; bottom: 0;" />
 </div>
-<div style="height: 100vh;"></div>
-<AppFooter style="position: fixed; width: 100vw; bottom: 0;" />
 </template>
 
 <script setup lang="ts">
@@ -106,18 +105,14 @@ onMounted(() => {
 <style scoped>
 /* Styles principaux pour la mise en page et les éléments */
 main {
-    position: fixed;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    margin-top: 100px;
-    padding: 4rem 1rem;
-    /* Suppression de min-width: max-content; */
-    max-width: fit-content; /* Gardé pour l'instant, mais title-container a un max-width */
-    box-sizing: border-box; /* Inclut padding dans width */
+    padding: 12rem 2rem 4rem; /* Top padding to offset header */
+    max-width: 1200px; /* Set a max-width for content */
+    margin: 0 auto; /* Center the main container */
+    box-sizing: border-box;
 }
 
 /* Conteneur du titre */
@@ -129,7 +124,7 @@ main {
   /* Aligné à droite sur desktop par défaut */
   align-items: flex-end;
   gap: 0.5rem; /* Espace réduit entre H1 et SVG par défaut */
-  max-width: 1200px; /* Limite la largeur maximale */
+  width: 100%; /* Take full width to respect main's max-width */
   padding: 0 1rem; /* Ajout de padding horizontal */
   box-sizing: border-box;
 }
@@ -211,6 +206,9 @@ h1 {
 
 /* Tablettes et petits laptops (<= 992px) */
 @media (max-width: 992px) {
+  main {
+    padding-top: 10rem;
+  }
   h1 {
     font-size: clamp(2.3rem, 7vw, 5rem); /* Taille légèrement réduite */
     white-space: normal; /* Allow wrapping on smaller laptops */
@@ -224,22 +222,13 @@ h1 {
 /* Tablettes (<= 768px) */
 @media (max-width: 768px) {
   main {
-    padding: 3rem 1rem; /* Réduction du padding vertical */
-    /* Permet le défilement si le contenu dépasse la hauteur */
-    position: static; /* On enlève fixed pour éviter les pbs de scroll */
-    transform: none;
-    left: auto;
-    min-height: auto; /* Hauteur basée sur le contenu */
-    display: block; /* On revient à un flux normal si besoin */
+    padding: 8rem 1rem 4rem;
   }
 
   .title-container {
     margin-bottom: 4rem;
-    width: 100%; /* Prend toute la largeur */
-    padding: 0 0.5rem; /* Padding horizontal réduit */
-    /* Aligne H1 et SVG à gauche */
     align-items: flex-start;
-    gap: 1rem; /* Espace un peu plus grand si H1 est sur plusieurs lignes */
+    gap: 1rem; 
   }
 
   h1 {
@@ -259,7 +248,7 @@ h1 {
 
   .contact-links {
     gap: 1.5rem; /* Espacement réduit */
-    /* Centre les items sur tablette/mobile (choix de design) */
+    align-items: flex-start; /* Align items to the left */
     width: 100%; /* Prend toute la largeur */
     padding: 0 0.5rem; /* Ajout de padding */
     box-sizing: border-box;
@@ -282,7 +271,7 @@ h1 {
 /* Mobiles (<= 480px) */
 @media (max-width: 480px) {
   main {
-    padding: 2rem 1rem; /* Encore moins de padding */
+    padding: 8rem 1rem 3rem;
   }
 
   .title-container {

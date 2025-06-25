@@ -26,7 +26,7 @@
     
     <div class="navigation">
       <ul class="nav-list">
-        <li v-for="(item, index) in ['projets', 'about', 'contact']" :key="index" class="nav-item" ref="navItems">
+        <li v-for="(item, index) in ['projets', 'about', 'contact']" :key="index" ref="navItems" class="nav-item">
           <a :href="`/${item}`" class="nav-link">
             <p class="nav-number">0{{ index + 1 }}.</p>
             <p class="nav-text">{{ item.toUpperCase() }}</p>
@@ -91,28 +91,26 @@ onMounted(() => {
 .header {
   position: fixed;
   width: 100%;
-  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-  overflow: hidden;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
+  background: var(--background-color);
 }
 
 /* Logo + Titre groupés */
 .logo-and-title {
   display: flex;
-  gap: 10px;
-  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   z-index: 30;
 }
 
 /* Limite la taille du logo */
 .logo-and-title svg {
-  max-width: 100px;
+  width: clamp(60px, 15vw, 100px);
   height: auto;
-  margin-right: 1rem;
 }
 
 /* Titre principal */
@@ -134,7 +132,7 @@ onMounted(() => {
   list-style: none;
   padding: 0;
   margin: 0;
-  gap: 8rem;
+  gap: 4rem;
 }
 
 .nav-item {
@@ -158,21 +156,31 @@ onMounted(() => {
 }
 
 .nav-number {
-  color: var(--text-color-light);
   opacity: 0.7;
 }
 
 @media (max-width: 768px) {
+  .header {
+    gap: 2rem;
+    padding: 1rem;
+  }
+
   .nav-list {
-    gap: 3rem;
+    gap: 2rem;
   }
   
   .nav-item {
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
-  
-  .background-text {
-    font-size: 2.5rem;
+}
+
+@media (max-width: 480px) {
+  .nav-list {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
   }
 }
 </style>
