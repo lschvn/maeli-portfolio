@@ -6,7 +6,7 @@
       <section v-if="projet" class="panel info-panel">
         <div class="info-content">
           <h1 v-html="projet.fullName.toUpperCase()"/>
-          <p class="description" v-html="projet.description"></p>
+          <p class="description" v-html="projet.description"/>
           <ul v-if="projet.tags && projet.tags.length > 0">
             <li v-for="(tag, index) in projet.tags" :key="`tag-${index}`">
               <span class="tag">{{ tag.toUpperCase() }}</span>
@@ -309,14 +309,8 @@ onUnmounted(() => {
 
 .info-panel {
   width: 100vw;
-  padding: 3vw 5vw;
+  padding: 15vh 5vw; /* Adjusted padding for desktop */
   background-color: var(--background-color);
-}
-
-@media (max-width: 768px) {
-  .info-panel {
-    padding: 20vw 5vw;
-  }
 }
 
 .info-content {
@@ -383,72 +377,6 @@ onUnmounted(() => {
   object-fit: contain;
 }
 
-/* --- STYLES RESPONSIVES POUR MOBILE (max-width: 768px) --- */
-@media (max-width: 768px) {
-  /* On ne veut plus de body.is-scrolling-horizontal sur mobile */
-  :global(body.is-scrolling-horizontal) {
-    overflow-x: auto !important; /* ou scroll */
-  }
-  :global(html), :global(body) {
-    overflow-x: hidden !important; /* S'assurer que la page globale n'a pas de scroll X non désiré */
-    overflow-y: auto !important; /* FORCER LE SCROLL VERTICAL SI NÉCESSAIRE */
-  }
-
-
-  .horizontal-scroll-wrapper {
-    height: auto; /* La hauteur s'adapte au contenu */
-    overflow: visible; /* Laisse le scroll naturel de la page se faire */
-    position: static; /* Pas de pinning */
-  }
-
-  .panels-container {
-    flex-direction: column; /* Les panneaux s'empilent verticalement */
-    width: 100%; /* Prend toute la largeur disponible */
-    height: auto; /* La hauteur s'adapte au contenu */
-    will-change: auto; /* Plus de transformation animée par GSAP ici */
-    /* Assurer qu'aucune transformation résiduelle de GSAP n'est appliquée */
-    transform: none !important;
-  }
-
-  .panel {
-    width: 100% !important; /* Tous les panneaux prennent toute la largeur */
-    height: auto; /* La hauteur s'adapte au contenu de chaque panneau */
-    /* Pour le padding sur mobile, on peut le mettre ici ou spécifiquement */
-    padding: 0; /* Reset padding général, sera géré par info-panel et image-panel si besoin */
-  }
-
-  .info-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100% !important; /* Prend toute la largeur */
-    max-width: none; /* Annule la max-width desktop */
-    height: 50vh;
-    padding: 30vh 30px; /* Ajustement du padding pour mobile */
-  }
-  .info-content h1 {
-    font-size: clamp(1.8rem, 6vw, 2.5rem); /* Taille de titre ajustée pour mobile */
-  }
-  .info-content p {
-    font-size: clamp(0.9rem, 4vw, 1rem); /* Taille de texte ajustée pour mobile */
-  }
-
-  .scroll-hint {
-    display: none; /* Pas de scroll horizontal, donc pas d'indicateur */
-  }
-
-  .image-panel img {
-    width: 100%; /* L'image prend toute la largeur de son conteneur (.image-panel) */
-    height: auto; /* La hauteur s'ajuste pour garder le ratio de l'image */
-    max-width: 100%; /* Redondant mais sûr */
-    max-height: none; /* Annule la contrainte de hauteur max desktop */
-    object-fit: cover; /* Ou 'contain', selon si vous voulez remplir ou afficher entièrement.
-                           'cover' avec width:100% et height:auto va s'assurer que l'image couvre
-                           la largeur et ajuste sa hauteur, ce qui est généralement ce qu'on veut. */
-  }
-}
-
 /* Style pour la flèche de navigation */
 .next-arrow-panel {
   height: 100%;
@@ -477,5 +405,69 @@ onUnmounted(() => {
 
 .next-project-arrow svg {
   display: block; /* Évite l'espace en dessous de l'SVG inline */
+}
+
+/* --- STYLES RESPONSIVES POUR MOBILE (max-width: 768px) --- */
+@media (max-width: 768px) {
+  /* On ne veut plus de body.is-scrolling-horizontal sur mobile */
+  :global(body.is-scrolling-horizontal) {
+    overflow-x: auto !important; /* ou scroll */
+  }
+  :global(html), :global(body) {
+    overflow-x: hidden !important; /* S'assurer que la page globale n'a pas de scroll X non désiré */
+    overflow-y: auto !important; /* FORCER LE SCROLL VERTICAL SI NÉCESSAIRE */
+  }
+
+  .horizontal-scroll-wrapper {
+    height: auto; /* La hauteur s'adapte au contenu */
+    overflow: visible; /* Laisse le scroll naturel de la page se faire */
+    position: static; /* Pas de pinning */
+  }
+
+  .panels-container {
+    flex-direction: column; /* Les panneaux s'empilent verticalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    height: auto; /* La hauteur s'adapte au contenu */
+    will-change: auto; /* Plus de transformation animée par GSAP ici */
+    /* Assurer qu'aucune transformation résiduelle de GSAP n'est appliquée */
+    transform: none !important;
+  }
+
+  .panel {
+    width: 100% !important; /* Tous les panneaux prennent toute la largeur */
+    height: auto; /* La hauteur s'adapte au contenu de chaque panneau */
+    padding: 0; /* Reset padding général, sera géré par info-panel et image-panel si besoin */
+  }
+
+  .info-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100% !important; /* Prend toute la largeur */
+    max-width: none; /* Annule la max-width desktop */
+    height: auto; /* Let the content define the height */
+    padding: 10rem 30px 4rem; /* Adjusted padding for mobile */
+  }
+  .info-content h1 {
+    font-size: clamp(1.8rem, 6vw, 2.5rem); /* Taille de titre ajustée pour mobile */
+  }
+  .info-content p {
+    font-size: clamp(0.9rem, 4vw, 1rem); /* Taille de texte ajustée pour mobile */
+  }
+
+  .scroll-hint {
+    display: none; /* Pas de scroll horizontal, donc pas d'indicateur */
+  }
+
+  .image-panel img {
+    width: 100%; /* L'image prend toute la largeur de son conteneur (.image-panel) */
+    height: auto; /* La hauteur s'ajuste pour garder le ratio de l'image */
+    max-width: 100%; /* Redondant mais sûr */
+    max-height: none; /* Annule la contrainte de hauteur max desktop */
+    object-fit: cover; /* Ou 'contain', selon si vous voulez remplir ou afficher entièrement.
+                           'cover' avec width:100% et height:auto va s'assurer que l'image couvre
+                           la largeur et ajuste sa hauteur, ce qui est généralement ce qu'on veut. */
+  }
 }
 </style>
