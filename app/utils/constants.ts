@@ -34,7 +34,7 @@ de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, avec le
       "tags": ["da", "crème solaire"],
       "path": "maya",
       "description": "Dans le cadre d’un <b>workshop</b>, nous avons travaillé à partir du nom <br>de marque imposé « Maya ». À partir de cela, chacun devait imaginer <br>un produit ou un service. J’ai choisi de développer une <b>marque de crème <br>solaire bio</b>, naturelle, non polluante pour l’océan, avec <b>la noix de coco</b> <br>comme ingrédient principal."
-      ,"img": 1
+      ,"img": 5
     }
   ],
   "creations": [
