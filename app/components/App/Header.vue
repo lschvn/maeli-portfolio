@@ -170,17 +170,22 @@ onMounted(() => {
   }
   
   .nav-item {
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .nav-list {
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .nav-link {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
+    gap: 0.2rem;
+  }
+
+  .nav-item {
+    padding: 0.2rem 0;
   }
 }
 </style>
