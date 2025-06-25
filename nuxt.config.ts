@@ -7,8 +7,9 @@ export default defineNuxtConfig({
     compatibilityVersion: 4
   },
 
+
   routeRules: {
-    '/': { static: true }
+    '/**': { static: true }
   },
 
   modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/scripts'],

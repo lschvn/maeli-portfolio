@@ -15,7 +15,7 @@
     "@nuxt/kit": "^3.17.5",
     "@nuxt/scripts": "0.10.5",
     "@unhead/vue": "^1.11.20",
-    "eslint": "^9.28.0",
+    "eslint": "^9.29.0",
     "gsap": "^3.13.0",
     "nuxt": "^3.17.5",
     "vue": "latest",

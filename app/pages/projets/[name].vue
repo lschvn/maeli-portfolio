@@ -49,9 +49,8 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, onActivated, nextTick, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, onActivated, onDeactivated, nextTick, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -78,7 +77,7 @@ const currentProjetIndex = computed(() => {
 
 const nextProjet = computed(() => {
   if (currentProjetIndex.value === -1 || currentProjetIndex.value >= allProjectsFlat.value.length - 1) {
-    return null; // Pas de projet suivant ou dernier projet
+    return null;
   }
   return allProjectsFlat.value[currentProjetIndex.value + 1];
 });
@@ -91,136 +90,133 @@ const nextProjetUrl = computed(() => {
     });
     return resolvedRoute.href;
   }
-  return '#'; // Fallback href
+  return '#';
 });
 
 const scrollWrapperEl = ref<HTMLElement | null>(null);
 const panelsContainerEl = ref<HTMLElement | null>(null);
 let gsapCtx: gsap.Context | null = null;
 
-// Watcher pour réinitialiser GSAP quand on change de projet
-watch(routeName, (newRoute, oldRoute) => {
-  if (newRoute !== oldRoute) { 
-    console.log(`Route changed from ${oldRoute} to ${newRoute}. Re-initializing GSAP.`);
-    if (gsapCtx) {
-      gsapCtx.revert();
-      gsapCtx = null;
-    }
-    nextTick(() => { 
-      initializeGSAP();
-      nextTick(() => { 
-        ScrollTrigger.refresh(true);
-        console.log("ScrollTrigger refreshed in routeName watcher.");
-      });
-    });
-  }
-});
-
-function initializeGSAP() {
-  if (!scrollWrapperEl.value || !panelsContainerEl.value) {
-    console.log("Slider GSAP : Wrapper ou conteneur de panneaux manquants.");
-    return;
-  }
+function cleanupGSAP() {
+  console.log("-> Running cleanupGSAP...");
+  // Tuer tous les triggers d'abord, c'est plus sûr
+  ScrollTrigger.killAll();
 
   if (gsapCtx) {
     gsapCtx.revert();
+    gsapCtx = null;
   }
 
-  gsapCtx = gsap.context(() => {
-    ScrollTrigger.matchMedia({
-      // Configuration pour Desktop (scroll horizontal)
-      "(min-width: 769px)": function() {
-        console.log("Activation du scroll horizontal GSAP pour desktop.");
-        document.body.classList.add('is-scrolling-horizontal');
-        if (!projet.value) {
-          console.log("GSAP Desktop: Données projet manquantes. Le slider horizontal ne sera pas activé.");
-          return;
-        }
-
-        const panels: HTMLElement[] = gsap.utils.toArray('.panel', panelsContainerEl.value);
-        if (panels.length <= 1) {
-          console.log("GSAP Desktop: Pas assez de panneaux pour l'animation de scroll horizontal.");
-          return;
-        }
-
-        const getScrollAmount = () => {
-          if (!panelsContainerEl.value || !scrollWrapperEl.value) return 0;
-          let totalWidth = 0;
-          panels.forEach(panel => {
-            if (getComputedStyle(panel).display !== 'none') {
-              totalWidth += panel.offsetWidth;
-            }
-          });
-          return totalWidth - scrollWrapperEl.value.clientWidth;
-        };
-        
-        if (panelsContainerEl.value) {
-          panelsContainerEl.value.style.flexDirection = 'row';
-          panelsContainerEl.value.style.width = 'max-content';
-        }
-
-        gsap.to(panelsContainerEl.value, {
-          x: () => `-${getScrollAmount()}px`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: scrollWrapperEl.value,
-            pin: true,
-            scrub: 1,
-            start: 'top top',
-            end: () => `+=${getScrollAmount()}`,
-            invalidateOnRefresh: true,
-          },
-        });
-
-        ScrollTrigger.create({
-          trigger: scrollWrapperEl.value,
-          start: 'top top',
-          end: () => `+=${getScrollAmount()}`,
-          toggleClass: { targets: 'body', className: 'is-scrolling-horizontal' },
-          invalidateOnRefresh: true,
-        });
-
-        return () => {
-          console.log("Désactivation du scroll horizontal GSAP (passage mobile ou démontage).");
-          document.body.classList.remove('is-scrolling-horizontal');
-          if (panelsContainerEl.value) {
-             gsap.set(panelsContainerEl.value, {clearProps: "x,width,flexDirection"});
-          }
-          if (scrollWrapperEl.value) {
-            // Revert should handle pinned element styles, but safeguard:
-            gsap.set(scrollWrapperEl.value, {clearProps: "height,overflow,position,paddingBottom,paddingTop,boxSizing"});
-          }
-        };
-      },
-
-      // Configuration pour Mobile (scroll vertical standard)
-      "(max-width: 768px)": function() {
-        console.log("Mode mobile activé : GSAP scroll horizontal désactivé.");
-        document.body.classList.remove('is-scrolling-horizontal');
-        
-        if (panelsContainerEl.value) {
-          gsap.set(panelsContainerEl.value, { 
-            x: 0, 
-            clearProps: "transform,width,flexDirection" // Let CSS manage layout
-          });
-        }
-        if (scrollWrapperEl.value) {
-          // CRITICAL: Clear all inline styles from the wrapper so CSS can take over for mobile.
-          gsap.set(scrollWrapperEl.value, { clearProps: "all" }); 
-        }
-        
-        return () => {
-          console.log("Passage de mobile à desktop, préparation pour GSAP.");
-          // Desktop matchMedia will re-apply its styles.
-        };
-      }
-    });
-  }, scrollWrapperEl.value); // Scope du contexte GSAP
+  // Nettoyage manuel et forcé des styles et classes
+  document.body.classList.remove('is-scrolling-horizontal');
+  if (panelsContainerEl.value) {
+    gsap.set(panelsContainerEl.value, { clearProps: "all" });
+  }
+  if (scrollWrapperEl.value) {
+    gsap.set(scrollWrapperEl.value, { clearProps: "all" });
+  }
+  
+  console.log("Cleanup complete. ScrollTriggers killed, context reverted, styles cleared.");
 }
 
+function initializeGSAP() {
+  if (gsapCtx) {
+    console.log("GSAP context already exists, cleaning up before initializing.");
+    cleanupGSAP();
+  }
+
+  // Attendre que le DOM soit définitivement prêt
+  nextTick(() => {
+    if (!scrollWrapperEl.value || !panelsContainerEl.value) {
+      console.log("GSAP Init: Wrapper or panels container not found in DOM.");
+      return;
+    }
+    console.log("-> Running initializeGSAP...");
+
+    gsapCtx = gsap.context(() => {
+      ScrollTrigger.matchMedia({
+        // Desktop
+        "(min-width: 769px)": function() {
+          console.log("Setting up horizontal scroll for desktop.");
+          const panels: HTMLElement[] = gsap.utils.toArray('.panel', panelsContainerEl.value);
+          if (panels.length <= 1) return;
+
+          const getScrollAmount = () => panelsContainerEl.value!.scrollWidth - scrollWrapperEl.value!.clientWidth;
+          
+          gsap.to(panelsContainerEl.value, {
+            x: () => `-${getScrollAmount()}px`,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: scrollWrapperEl.value,
+              pin: true,
+              scrub: 1,
+              start: 'top top',
+              end: () => `+=${getScrollAmount()}`,
+              invalidateOnRefresh: true,
+            },
+          });
+          
+          ScrollTrigger.create({
+            trigger: scrollWrapperEl.value,
+            start: 'top top',
+            end: () => `+=${getScrollAmount()}`,
+            toggleClass: { targets: 'body', className: 'is-scrolling-horizontal' },
+            invalidateOnRefresh: true,
+          });
+        },
+        // Mobile
+        "(max-width: 768px)": function() {
+          console.log("Setting up for vertical scroll (mobile).");
+          // Pas besoin de JS pour le scroll vertical, les styles sont déjà là.
+          // On s'assure juste que tout est propre.
+          document.body.classList.remove('is-scrolling-horizontal');
+        }
+      });
+    }, scrollWrapperEl.value);
+
+    // Forcer un rafraîchissement global après un court délai pour laisser le temps au rendu
+    setTimeout(() => {
+      console.log("Refreshing ScrollTrigger after initialization.");
+      ScrollTrigger.refresh(true);
+    }, 100);
+  });
+}
+
+// Gère la navigation entre les pages de projet (ex: projet1 -> projet2)
+watch(routeName, (newRoute, oldRoute) => {
+  if (newRoute && newRoute !== oldRoute) {
+    console.log(`Project route changed: ${oldRoute} -> ${newRoute}`);
+    cleanupGSAP();
+    initializeGSAP();
+  }
+});
+
+// Quand le composant est monté pour la première fois
+onMounted(() => {
+  console.log("Component Mounted. Initializing GSAP.");
+  initializeGSAP();
+});
+
+// Quand on quitte la page (le composant est détruit)
+onUnmounted(() => {
+  console.log("Component Unmounted. Cleaning up GSAP.");
+  cleanupGSAP();
+});
+
+// Pour les cas où <keep-alive> est utilisé
+onActivated(() => {
+  console.log("Component Activated (keep-alive). Initializing GSAP.");
+  initializeGSAP();
+});
+
+onDeactivated(() => {
+  console.log("Component Deactivated (keep-alive). Cleaning up GSAP.");
+  cleanupGSAP();
+});
+
+
 function handleImageLoad(_event: Event) {
-  // Optionnel: forcer un rafraîchissement si les dimensions n'étaient pas connues
-  // ScrollTrigger.refresh(); // Peut être coûteux
+  ScrollTrigger.refresh(true);
 }
 
 function handleImageError(event: Event) {
@@ -229,45 +225,15 @@ function handleImageError(event: Event) {
   const panel = img.closest('.panel.image-panel') as HTMLElement | null;
   if (panel) {
     if (panel.style.display !== 'none') {
-      console.warn(`Image n'a pas pu charger: ${img.src}. Masquage du panneau parent.`);
+      console.warn(`Image failed to load: ${img.src}. Hiding parent panel.`);
       panel.style.display = 'none';
       ScrollTrigger.refresh(true);
     }
   } else {
-    console.error('Impossible de trouver le panneau parent pour l\'image en erreur:', img.src);
+    console.error('Could not find parent panel for erroring image:', img.src);
   }
 }
-
-onMounted(() => {
-  nextTick(() => {
-    // ScrollTrigger.refresh(true); // Initializing GSAP will trigger necessary evaluations by matchMedia
-    initializeGSAP();
-  });
-});
-
-onActivated(() => {
-  nextTick(() => {
-    console.log("Component activated. Reverting, re-initializing GSAP, then refreshing ScrollTrigger.");
-    if (gsapCtx) {
-      gsapCtx.revert();
-      gsapCtx = null;
-    }
-    initializeGSAP(); // This sets up matchMedia
-    // Ensure matchMedia logic has run and DOM is updated before refreshing
-    nextTick(() => {
-      ScrollTrigger.refresh(true); 
-      console.log("ScrollTrigger refreshed in onActivated.");
-    });
-  });
-});
-
-onUnmounted(() => {
-  gsapCtx?.revert(); // Nettoie toutes les animations et ScrollTriggers créés dans le contexte
-  document.body.classList.remove('is-scrolling-horizontal'); // Sécurité
-  console.log("Slider GSAP : Contexte annulé et nettoyage effectué.");
-});
 </script>
-
 <style scoped>
 /* Styles globaux pour desktop par défaut */
 :global(body.is-scrolling-horizontal) {
