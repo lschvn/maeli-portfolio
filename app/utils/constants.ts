@@ -59,8 +59,8 @@ de <strong>boisson énergisante</strong>. J’ai ainsi imaginé Fruizzz, avec le
       "fullName": "Le fort de l’île pelée",
       "tags": ["DA", "MISE EN PAGE"],
       "path": "le-fort-de-l-ile-pelee",
-      "description": "J’ai assuré la direction artistique de A à Z d’un <strong>ouvrage</strong> dédié à la découverte <br>du fort de l’Île Pelée pour le <strong>Port de Normandie</strong>. De la conception graphique à la mise <br>en page finale, j’ai travaillé à créer un visuel immersif de l’histoire du lieu tout en apportant <br>une touche <strong>contemporaine</strong>.",
-      "img": 2
+      "description": "Dans le cadre de mon alternance chez M2 event, j’ai assuré la direction artistique de A à Z <br>d’un <strong>ouvrage</strong> dédié à la découverte du fort de l’Île Pelée pour le <strong>Port de Normandie</strong>. <br>De la conception graphique à la mise en page finale, j’ai travaillé à créer un visuel immersif <br>de l’histoire du lieu tout en apportant une touche <strong>contemporaine</strong>. <br>",
+      "img": 3
     },
     
     // {

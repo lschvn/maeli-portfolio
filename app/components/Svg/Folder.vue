@@ -76,11 +76,11 @@ div h1 {
   }
 
   .stars {
-    width: 180px; /* Slightly smaller star */
-    height: auto; /* Maintain aspect ratio */
-    /* Adjust star offsets slightly if needed */
-    transform: translate(calc(var(--star-offset-x) * 0.8), calc(var(--star-offset-y) * 0.8));
-  }
+      width: 180px; /* Slightly smaller star */
+      height: auto; /* Maintain aspect ratio */
+      /* Adjust star offsets slightly if needed */
+      transform: translate(calc(var(--star-offset-x) * 0.8), calc(var(--star-offset-y) * 0.8));
+    }
 
   div h1 {
     font-size: 1em; /* Slightly smaller text */
