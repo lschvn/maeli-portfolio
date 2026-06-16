@@ -23,7 +23,7 @@
             <p ref="introP2" class="intro-paragraph-2">
               J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse<br>
               en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées,<br>
-              c'est ce que j'aime dans ce domaine. Je suis à l'écoute, organisée et<br>
+              c'est ça que j'aime dans ce domaine. Je suis à l'écoute, organisée et<br>
               consciencieuse.
             </p>
           </div>
@@ -36,7 +36,7 @@
             <p ref="introP2" class="intro-paragraph-2">
               J'ai toujours eu un attrait pour le design, ce qui me pousse à être curieuse
               en regardant les tendances dans ce domaine. Pouvoir "donner vie" à des idées,
-              c'est ce que j'aime dans ce domaine. Je suis à l'écoute, organisée et
+              c'est ça que j'aime dans ce domaine. Je suis à l'écoute, organisée et
               consciencieuse.
             </p>
           </div>
@@ -62,6 +62,13 @@
                 à My Digital School
               </div>
             </li>
+            <li class="timeline-item formation-item">
+              <div class="timeline-date">2025-2027</div>
+              <div class="timeline-description">
+                Master direction artistique<br >
+                à My Digital School
+              </div>
+            </li>
           </ul>
         </section>
 
@@ -84,6 +91,10 @@
             <li class="timeline-item experience-item">
               <div class="timeline-date">2024-2025</div>
               <div class="timeline-description">Alternance chez M2 Event</div>
+            </li>
+            <li class="timeline-item experience-item">
+              <div class="timeline-date">2026-2027</div>
+              <div class="timeline-description">Alternance à Caen Événements</div>
             </li>
           </ul>
         </section>
